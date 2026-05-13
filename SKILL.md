@@ -29,7 +29,10 @@ description: |
 │  │  └─ components.css  # 组件样式
 │  └─ scripts/
 │     └─ app.js          # 组件公共逻辑/交互
-└─ 业务页面目录/          # 业务代码（仅复制组件代码使用）
+└─ erp/                  # 业务代码（根据系统名称命名）
+    ├─ styles/           # 模块样式目录
+    ├─ scripts/          # 模块交互目录
+    └─template/          # 页面模块html目录
 ```
 
 ## 3. 系统界面设计
