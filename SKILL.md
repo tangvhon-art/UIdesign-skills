@@ -1,27 +1,33 @@
 ---
 name: 原型设计与前端开发规范
 description: |
-  1. 本规范用于统一所有系统的设计与开发标准，所有业务系统必须基于 design/ 公共组件库进行开发；
-  2. 遵循核心规则：全量复制组件库到各自系统、直接复制组件代码使用、零修改零二次开发，保证所有系统界面、交互、代码风格完全统一；
-  3. 固定目录结构，保留 design/ 公共组件库完整目录及文件，业务代码独立存放；
-  4. 界面设计严格复用已有组件，遵循组件库尺寸、间距、色彩、字体、交互规则，禁止新增设计规范与定制改造组件；
-  5. 开发阶段直接原样复制组件DOM结构，仅允许修改文本、图片、接口等业务可变数据，禁止改动组件结构、原生样式与内置逻辑；
-  6. 优先复用组件库公共样式与交互方法，业务个性化可新增自定义CSS与自定义逻辑，禁止覆盖篡改组件原生样式和公共组件库原生逻辑；
-  7. 全流程严格遵守规范，违规修改组件库结构、样式、逻辑需整改返工，所有设计开发问题优先对齐 design/ 组件库现有标准。
+  Unified design system and frontend development standards for all business systems. Follow core rules: full copy of component library to each system, direct reuse of component code with zero modification, ensuring complete UI/UX consistency.
+category: development
+version: 1.0.0
+tags: [ui-design, frontend, design-system, component-library, development-standards]
+author: "UI Design Team"
 ---
-
-
 
 # 原型设计与前端开发规范（SKILL）
 
-## 1. description（项目描述）
-本规范用于**统一所有系统的设计与开发标准**，所有业务系统必须基于 `design/` 公共组件库进行开发。
-核心规则：**全量复制组件库到各自系统 + 直接复制组件代码使用 + 零修改、零二次开发**，确保所有系统界面、交互、代码风格完全统一。
+## 技能概述
 
-## 2. 目录结构
+本技能提供一套**框架无关的 UI 组件库**与**前端开发规范**，用于统一所有业务系统的设计与开发标准。视觉语义对齐 **Ant Design Pro** 的中后台风格，支持亮色/暗色主题一键切换。
+
+> **核心原则：** 全量复制组件库 → 直接复制组件代码使用 → 零修改、零二次开发。保证所有系统界面、交互、代码风格完全统一。
+
+## 使用场景
+
+当需要：
+- 创建新的业务系统界面
+- 开发统一风格的网页应用
+- 维护公司内部系统UI一致性
+- 快速原型设计和开发
+
+## 目录结构
 
 ```
-├─ design/               # 全量复制的公共组件库（原样保留）
+├─ design/               # 公共组件库（原样保留，禁止修改）
 │  ├─ index.html         # 组件库总模板（所有组件DOM结构）
 │  ├─ styles/
 │  │  ├─ tokens.css      # 设计令牌（色彩/间距/字体等）
@@ -29,10 +35,10 @@ description: |
 │  │  └─ components.css  # 组件样式
 │  └─ scripts/
 │     └─ app.js          # 组件公共逻辑/交互
-└─ erp/                  # 业务代码（根据系统名称命名）
-    ├─ styles/           # 模块样式目录
-    ├─ scripts/          # 模块交互目录
-    └─template/          # 页面模块html目录
+└─ 业务页面目录/          # 业务代码（根据系统名称命名）
+   ├─ styles/           # 模块样式目录
+   ├─ scripts/          # 模块交互目录
+   └─template/          # 页面模块html目录
 ```
 
 ## 3. 系统界面设计

@@ -1,0 +1,29 @@
+{
+  "name": "uidesign-skill",
+  "version": "1.0.0",
+  "description": "Unified design system and frontend development standards for all business systems",
+  "main": "SKILL.md",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "echo \"Build complete\""
+  },
+  "keywords": [
+    "ui-design",
+    "frontend",
+    "design-system",
+    "component-library",
+    "development-standards"
+  ],
+  "author": "UI Design Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/uidesign-skills"
+  },
+  "files": [
+    "SKILL.md",
+    "design/",
+    "README.md"
+  ]
+}
