@@ -24,21 +24,22 @@ author: "UI Design Team"
 - 维护公司内部系统UI一致性
 - 快速原型设计和开发
 
-## 目录结构
+## 目录结构(按以下目录进行设计定稿)
 
 ```
-├─ design/               # 公共组件库（原样保留，禁止修改）
-│  ├─ index.html         # 组件库总模板（所有组件DOM结构）
-│  ├─ styles/
-│  │  ├─ tokens.css      # 设计令牌（色彩/间距/字体等）
-│  │  ├─ base.css        # 基础样式
-│  │  └─ components.css  # 组件样式
-│  └─ scripts/
-│     └─ app.js          # 组件公共逻辑/交互
-└─ 业务页面目录/          # 业务代码（根据系统名称命名）
-   ├─ styles/           # 模块样式目录
-   ├─ scripts/          # 模块交互目录
-   └─template/          # 页面模块html目录
+├─ project/               # 你的业务代码放在这里（仅复制组件使用）
+     ├─ styles/             #组件样式（主样式，及各模块样式）
+     │  ├─ order.css
+     │  ├─ list.css
+     │  └─ base.css   
+     └─ scripts/            #组件交互逻辑（主交互，及各模块交互）
+     │  ├─ order.css
+     │  ├─ list.css
+     │  └─ app.js  
+     └─template             #页面视图（放入各模块的视图文件）
+     │  ├─ order            #订单页面文件夹（放入订单各页面视图）
+     │  └─ product          #订单页面文件夹（放入商品各页面视图）
+     └─ index.html          #主视图html
 ```
 
 ## 3. 系统界面设计

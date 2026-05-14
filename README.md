@@ -1,5 +1,33 @@
 # 原型设计与前端开发规范（UIdesign Skills）
 
+## 🚀 快速开始
+
+### 作为可安装的Skill（推荐）
+```bash
+# 1. 克隆并安装
+git clone <repository-url> UIdesign-skills
+cd UIdesign-skills
+
+# 2. 一键安装
+python3 install.py
+
+# 3. 验证安装
+python3 update-skills-json.py
+```
+
+安装完成后，AI助手会在UI设计任务中**自动调用此技能**。
+
+### 直接使用
+```bash
+# 可视化浏览所有组件
+open design/index.html
+
+# 查看组件代码
+cat design/index.html | grep -A 20 "card"
+```
+
+---
+
 ## 项目概述
 
 本项目提供一套**框架无关的 UI 组件库**与**前端开发规范**，用于统一所有业务系统的设计与开发标准。视觉语义对齐 **Ant Design Pro** 的中后台风格，支持亮色/暗色主题一键切换。
@@ -26,7 +54,19 @@
 │  └─ scripts/
 │     └─ app.js               # 组件公共交互逻辑（预览页用）
 │
-└─ 业务页面目录/               # 你的业务代码放在这里（仅复制组件使用）
+└─ project/               # 你的业务代码放在这里（仅复制组件使用）
+     ├─ styles/             #组件样式（主样式，及各模块样式）
+     │  ├─ order.css
+     │  ├─ list.css
+     │  └─ base.css   
+     └─ scripts/            #组件交互逻辑（主交互，及各模块交互）
+     │  ├─ order.css
+     │  ├─ list.css
+     │  └─ app.js  
+     └─template             #页面视图（放入各模块的视图文件）
+     │  ├─ order            #订单页面文件夹（放入订单各页面视图）
+     │  └─ product          #订单页面文件夹（放入商品各页面视图）
+     └─ index.html          #主视图html
 ```
 
 **关键约束：**
@@ -134,7 +174,7 @@
 ### 通用
 | 组件 | CSS 类名 | 说明 |
 |------|----------|------|
-| Button | `.sw-btn` | 6 变体（primary / default / ghost / link / danger / disabled），3 尺寸（sm / md / lg） |
+| Button | `.sw-btn` | 6 变体（primary / default / ghost / link / danger / disabled），3 尺寸（sm / md / lg）  字体单行显示：white-space: nowrap;|
 | IconButton | `.sw-iconbtn` | 纯图标按钮，用于工具栏、关闭等 |
 
 ### 布局
@@ -349,3 +389,85 @@ document.documentElement.setAttribute('data-theme', 'dark');
 - [组件样式](design/styles/components.css) — 所有组件样式源码
 - [布局样式](design/styles/base.css) — Shell 布局与栅格系统
 - [规范文档](SKILL.md) — 完整的 Skill 定义与规范细则
+
+## 作为可安装的Skill使用
+
+本项目可以作为可安装的Skill集成到AI开发助手中，当需要创建UI界面时自动提供设计规范和组件库。
+
+### 安装方法
+
+#### 方法一：使用安装脚本（推荐）
+
+```bash
+# 1. 克隆项目
+cd /path/to/your/projects
+git clone <repository-url> UIdesign-skills
+cd UIdesign-skills
+
+# 2. 运行安装脚本
+python install.py
+```
+
+#### 方法二：手动安装
+
+1. **复制技能文件** 到agent-skills目录：
+```bash
+mkdir -p ~/.agent-skills/skills/development/uidesign
+cp -r design/ ~/.agent-skills/skills/development/uidesign/
+cp SKILL.md ~/.agent-skills/skills/development/uidesign/
+cp README.md ~/.agent-skills/skills/development/uidesign/
+```
+
+2. **更新skills.json** 在 `~/.agent-skills/skills.json` 文件的 `"skills"` 数组中添加：
+```json
+{
+  "name": "uidesign",
+  "display_name": "UI Design & Frontend Standards",
+  "description": "Unified design system and frontend development standards for all business systems.",
+  "category": "development",
+  "subcategory": null,
+  "path": "skills/development/uidesign/SKILL.md",
+  "install_path": "skills/development/uidesign/",
+  "version": "1.0.0",
+  "tags": [
+    "ui-design",
+    "frontend",
+    "design-system",
+    "component-library"
+  ]
+}
+```
+
+### 使用方法
+
+安装完成后，AI助手会在以下场景自动识别并使用此技能：
+
+1. **创建新的业务系统界面**
+2. **开发统一风格的网页应用**
+3. **维护公司内部系统UI一致性**
+4. **快速原型设计和开发**
+
+**示例请求：**
+- "创建一个管理后台页面"
+- "设计一个包含表格和表单的ERP系统界面"
+- "创建一个带有侧边栏和顶部导航的仪表板"
+
+### 技能特点
+
+1. **自动触发** - AI助手会根据需求自动识别是否需要UI设计技能
+2. **规范指导** - 提供完整的开发规范和最佳实践
+3. **组件重用** - 提供可直接复用的HTML/CSS/JS组件代码
+4. **一致性保障** - 确保所有系统界面风格统一
+
+---
+
+## 项目文件说明
+
+| 文件 | 说明 |
+|------|------|
+| `SKILL.md` | 技能核心文档，包含YAML frontmatter和详细规范 |
+| `skill-manifest.json` | 技能元数据文件，用于技能系统识别 |
+| `install.py` / `install-skill.sh` | 安装脚本，简化安装过程 |
+| `package.json` | Node.js包管理文件 |
+| `design/` | 公共组件库目录（核心资产） |
+| `erp/` | 示例业务系统（参考实现）
