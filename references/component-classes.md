@@ -162,19 +162,97 @@
 <span class="sw-dot-status sw-dot-status--info">信息</span>
 ```
 
-## 导航 Navigation
+## 菜单 Menu
+
+**用途**：侧边栏导航（垂直）或顶部导航栏（水平）。
+**交互依赖**：子菜单展开需 `app.js`，`data-target` 滚动定位需 `app.js`。
+
+### 变体一览
+
+| class | 说明 |
+|-------|------|
+| `sw-menu` | 基础垂直菜单（用于侧边栏） |
+| `sw-menu sw-menu--horizontal` | 水平菜单（用于顶部导航栏），激活项显示底部蓝色下划线 |
+| `sw-menu__group` | 菜单分组容器，顶部有虚线分隔 |
+| `sw-menu__label` | 分组标题文字（灰色小字） |
+| `sw-menu__item` | 菜单项，`aria-current="page"` 表示当前激活项（蓝色高亮） |
+| `sw-menu__icon` | 菜单项左侧图标容器（18×18） |
+| `sw-menu__item[aria-expanded]` | 可展开的父菜单项，`aria-expanded="true"` 时展开子菜单 |
+| `sw-menu__item-arrow` | 展开箭头图标，激活时自动旋转 180° |
+| `sw-menu__sub` | 子菜单容器，父项 `aria-expanded="true"` 时显示 |
+
+### 垂直菜单（侧边栏）
 
 ```html
-<!-- 菜单 -->
-<nav class="sw-menu">
+<nav class="sw-menu" aria-label="侧边导航">
+
+  <!-- 无分组的顶级菜单项 -->
+  <div class="sw-menu__item" aria-current="page" data-target="sec-overview">
+    <span class="sw-menu__icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M4 11.5V20h16v-8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 3l9 8H3l9-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    概览
+  </div>
+
+  <!-- 带分组的菜单 -->
   <div class="sw-menu__group">
-    <div class="sw-menu__label">分组名</div>
-    <div class="sw-menu__item" aria-current="page" data-target="sec-id">
-      <span class="sw-menu__icon"><svg ...></svg></span>
-      菜单项
+    <div class="sw-menu__label">业务管理</div>
+
+    <!-- 普通菜单项 -->
+    <div class="sw-menu__item" data-target="sec-orders">
+      <span class="sw-menu__icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="2"/>
+          <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </span>
+      订单管理
     </div>
+
+    <!-- 可展开的父菜单项（需 app.js） -->
+    <div class="sw-menu__item" aria-expanded="false">
+      <span class="sw-menu__icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      商品管理
+      <svg class="sw-menu__item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <!-- 子菜单（父项 aria-expanded="true" 时自动显示） -->
+    <div class="sw-menu__sub">
+      <div class="sw-menu__item" data-target="sec-products">商品列表</div>
+      <div class="sw-menu__item" data-target="sec-categories">商品分类</div>
+    </div>
+
   </div>
 </nav>
+```
+
+### 水平菜单（顶部导航栏）
+
+激活项底部显示 2px 蓝色下划线，背景透明（不同于垂直菜单的蓝色背景块）。
+
+```html
+<nav class="sw-menu sw-menu--horizontal" aria-label="顶部导航">
+  <div class="sw-menu__item" aria-current="page">首页</div>
+  <div class="sw-menu__item">订单管理</div>
+  <div class="sw-menu__item">商品管理</div>
+  <div class="sw-menu__item">数据报表</div>
+  <div class="sw-menu__item">系统设置</div>
+</nav>
+```
+
+### 激活态说明
+
+- **垂直菜单激活**：`aria-current="page"` → 蓝色背景块 + 蓝色文字
+- **水平菜单激活**：`aria-current="page"` → 底部 2px 蓝色下划线，背景保持透明
+- **切换激活项**：移除旧项的 `aria-current="page"`，在新项上添加 `aria-current="page"`
 
 <!-- 面包屑 -->
 <div class="sw-breadcrumb">

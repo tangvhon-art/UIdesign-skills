@@ -85,7 +85,9 @@ metadata:
 | 下拉选择、Select | `## 下拉选择 Select` |
 | 复选框、单选框、开关 | `## 选择控件 Checkbox/Radio/Switch` |
 | 标签、状态标记、徽标、头像 | `## 标签 Tag / 徽标 Badge / 头像 Avatar` |
-| 侧边菜单、导航菜单 | `## 菜单 Menu` |
+| 侧边菜单、导航菜单、垂直菜单 | `## 菜单 Menu` → 垂直菜单 |
+| 顶部导航栏、水平菜单 | `## 菜单 Menu` → 水平菜单（`sw-menu--horizontal`） |
+| 子菜单、可展开菜单 | `## 菜单 Menu` → 可展开父菜单项（`aria-expanded`） |
 | 面包屑、路径导航 | `## 面包屑 Breadcrumb` |
 | 标签页、Tab 切换 | `## 标签页 Tabs` |
 | 分段控制器、视图切换 | `## 分段控制器 Segmented` |
