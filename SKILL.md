@@ -1,11 +1,9 @@
 ---
-name: 原型设计与前端开发规范
-description: |
-  Unified design system and frontend development standards for all business systems. Follow core rules: full copy of component library to each system, direct reuse of component code with zero modification, ensuring complete UI/UX consistency.
-category: development
-version: 1.0.0
-tags: [ui-design, frontend, design-system, component-library, development-standards]
-author: "UI Design Team"
+name: ui-design
+description: Unified design system and frontend development standards for enterprise business systems. Use when creating UI interfaces, designing admin dashboards, building frontend pages, developing components, or following frontend coding standards.
+metadata:
+  author: UI Design Team
+  version: "1.0.0"
 ---
 
 # 原型设计与前端开发规范（SKILL）

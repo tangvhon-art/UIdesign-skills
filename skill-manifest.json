@@ -1,5 +1,5 @@
 {
-  "name": "原型设计与前端开发规范",
+  "name": "ui-design",
   "display_name": "UI Design & Frontend Standards",
   "description": "Unified design system and frontend development standards for all business systems. Follow core rules: full copy of component library to each system, direct reuse of component code with zero modification, ensuring complete UI/UX consistency.",
   "category": "development",
