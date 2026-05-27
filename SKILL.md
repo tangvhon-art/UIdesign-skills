@@ -1,10 +1,10 @@
 ---
 name: 原型设计与前端开发规范
 description: |
-  基于行业标准的企业级前端UI设计体系与开发规范，对齐 Ant Design Pro 设计语言，提供可复用的公共组件库与最佳实践。核心导向：优先复用公共组件，保持界面、交互、代码风格统一，提升开发效率与一致性。
+  Unified design system and frontend development standards for all business systems. Follow core rules: full copy of component library to each system, direct reuse of component code with zero modification, ensuring complete UI/UX consistency.
 category: development
-version: 3.0.0
-tags: [ui-design, frontend, design-system, component-library, code-reuse, best-practices]
+version: 1.0.0
+tags: [ui-design, frontend, design-system, component-library, development-standards]
 author: "UI Design Team"
 ---
 
