@@ -377,6 +377,104 @@ function init(){
     });
   });
 
+  // ========= NEW: InputNumber =========
+  $$('.sw-input-number').forEach(wrap => {
+    const input = wrap.querySelector('input');
+    const dec = wrap.querySelector('[data-in-dec]');
+    const inc = wrap.querySelector('[data-in-inc]');
+    if (!input) return;
+    on(dec, 'click', () => {
+      const min = parseFloat(input.min ?? '-Infinity');
+      const step = parseFloat(input.step ?? 1);
+      const val = parseFloat(input.value ?? 0) - step;
+      if (val >= min) { input.value = val; toast({ title: '已更新', desc: `当前值：${val}`, tone: 'info' }); }
+    });
+    on(inc, 'click', () => {
+      const max = parseFloat(input.max ?? 'Infinity');
+      const step = parseFloat(input.step ?? 1);
+      const val = parseFloat(input.value ?? 0) + step;
+      if (val <= max) { input.value = val; toast({ title: '已更新', desc: `当前值：${val}`, tone: 'info' }); }
+    });
+  });
+
+  // ========= NEW: Slider (drag) =========
+  $$('.sw-slider').forEach(slider => {
+    const thumb = slider.querySelector('.sw-slider__thumb');
+    const fill  = slider.querySelector('.sw-slider__fill');
+    const label = slider.querySelector('.sw-slider__value');
+    const track = slider.querySelector('.sw-slider__track');
+    if (!thumb || !track) return;
+
+    function updateSlider(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      thumb.style.left = pct + '%';
+      if (fill) fill.style.width = pct + '%';
+      const val = Math.round(pct);
+      thumb.setAttribute('aria-valuenow', val);
+      if (label) label.textContent = `当前值：${val}`;
+    }
+
+    on(track.parentElement, 'mousedown', e => {
+      const rect = track.getBoundingClientRect();
+      const move = ev => {
+        const pct = ((ev.clientX - rect.left) / rect.width) * 100;
+        updateSlider(pct);
+      };
+      const up = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+      };
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', up);
+      move(e);
+    });
+  });
+
+  // ========= NEW: Cascader toggle =========
+  $$('.sw-cascader').forEach(cas => {
+    const input = cas.querySelector('.sw-cascader__input');
+    on(input, 'click', e => {
+      e.stopPropagation();
+      const open = cas.dataset.open === 'true';
+      cas.dataset.open = open ? 'false' : 'true';
+    });
+    // Select leaf item
+    $$('.sw-cascader__item[data-cas-l3]', cas).forEach(item => {
+      on(item, 'click', () => {
+        const textEl = cas.querySelector('[id$="-text"]') || cas.querySelector('.sw-cascader__input span');
+        const val = item.getAttribute('data-cas-l3');
+        if (textEl) { textEl.textContent = `广东省 / 深圳市 / ${val}`; textEl.style.color = ''; }
+        cas.dataset.open = 'false';
+        toast({ title: '已选择', desc: val, tone: 'success' });
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!cas.contains(e.target)) cas.dataset.open = 'false';
+    });
+  });
+
+  // ========= NEW: Menu sub-menu toggle =========
+  $$('.sw-menu__item[aria-expanded]').forEach(item => {
+    on(item, 'click', () => {
+      const expanded = item.getAttribute('aria-expanded') === 'true';
+      item.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  });
+
+  // ========= NEW: Tag close =========
+  $$('.sw-tag__close').forEach(btn => {
+    on(btn, 'click', e => {
+      e.stopPropagation();
+      const tag = btn.closest('.sw-tag');
+      if (tag) {
+        tag.style.transition = 'opacity 180ms var(--sw-ease), transform 180ms var(--sw-ease)';
+        tag.style.opacity = '0';
+        tag.style.transform = 'scale(0.85)';
+        setTimeout(() => tag.remove(), 190);
+      }
+    });
+  });
+
   // ========= DatePicker & TimePicker =========
   initDatePickers();
   initTimePickers();
