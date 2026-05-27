@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>sw-ui 组件库预览（Design 风格）</title>
+    <link rel="stylesheet" href="./styles/tokens.css" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/components.css" />
+  </head>
+  <body>
+    <div class="sw-shell" data-sider-open="false">
+
+      <!-- ===== 侧边栏 ===== -->
+      <aside class="sw-sider" aria-label="侧边栏">
+        <div class="sw-sider__brand">
+          <div class="sw-logo" aria-hidden="true"></div>
+          <div style="min-width:0">
+            <div class="sw-brand-title">sw-ui / Design</div>
+            <div class="sw-brand-sub">企业级组件库（Pro 风格）</div>
+          </div>
+          <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+            <button id="swSiderClose" class="sw-iconbtn" title="关闭菜单" aria-label="关闭菜单">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="sw-sider__scroll">
+          <nav class="sw-menu" aria-label="组件导航">
+
+            <!-- 概览 -->
+            <div class="sw-menu__item" aria-current="page" data-target="sec-overview">
+              <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 11.5V20h16v-8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3l9 8H3l9-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+              概览
+            </div>
+            <div class="sw-menu__item" data-target="sec-tokens">
+              <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+              设计令牌
+            </div>
+
+            <!-- 通用 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">通用</div>
+              <div class="sw-menu__item" data-target="sec-buttons">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="10" rx="5" stroke="currentColor" stroke-width="2"/></svg></span>
+                Button 按钮
+              </div>
+              <div class="sw-menu__item" data-target="sec-typography">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                Typography 排版
+              </div>
+              <div class="sw-menu__item" data-target="sec-icon">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                Tag / Badge / Avatar
+              </div>
+            </div>
+
+            <!-- 布局 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">布局</div>
+              <div class="sw-menu__item" data-target="sec-layout">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4V4Z" stroke="currentColor" stroke-width="2"/><path d="M14 4h6v16h-6V4Z" stroke="currentColor" stroke-width="2"/><path d="M4 14h6v6H4v-6Z" stroke="currentColor" stroke-width="2"/></svg></span>
+                Layout 布局
+              </div>
+              <div class="sw-menu__item" data-target="sec-card">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg></span>
+                Card 卡片
+              </div>
+              <div class="sw-menu__item" data-target="sec-divider">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg></span>
+                Divider / Space
+              </div>
+            </div>
+
+            <!-- 导航 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">导航</div>
+              <div class="sw-menu__item" data-target="sec-menu">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                Menu 菜单
+              </div>
+              <div class="sw-menu__item" data-target="sec-breadcrumb">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                Breadcrumb / Anchor
+              </div>
+              <div class="sw-menu__item" data-target="sec-tabs">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 9h18M3 15h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="4" width="6" height="5" rx="1" stroke="currentColor" stroke-width="2"/></svg></span>
+                Tabs 标签页
+              </div>
+            </div>
+
+            <!-- 数据录入 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">数据录入</div>
+              <div class="sw-menu__item" data-target="sec-forms">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 4h14v16H5V4Z" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                Form 表单
+              </div>
+              <div class="sw-menu__item" data-target="sec-input-ext">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="8" rx="3" stroke="currentColor" stroke-width="2"/><path d="M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                InputNumber / Slider
+              </div>
+              <div class="sw-menu__item" data-target="sec-datetime">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                Date / Time
+              </div>
+              <div class="sw-menu__item" data-target="sec-cascader">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                Cascader / Transfer
+              </div>
+              <div class="sw-menu__item" data-target="sec-entry">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v14m-5-5l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17v3h18v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                Upload / Rate / Segmented
+              </div>
+            </div>
+
+            <!-- 数据展示 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">数据展示</div>
+              <div class="sw-menu__item" data-target="sec-data">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                Table / Pagination
+              </div>
+              <div class="sw-menu__item" data-target="sec-display">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3V3Z" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"/></svg></span>
+                Timeline / Tree / List
+              </div>
+              <div class="sw-menu__item" data-target="sec-statistic">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 15l4-4 5 5 4-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                Statistic / Progress
+              </div>
+              <div class="sw-menu__item" data-target="sec-image">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                Image 图片
+              </div>
+            </div>
+
+            <!-- 反馈 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">反馈</div>
+              <div class="sw-menu__item" data-target="sec-feedback">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a4 4 0 0 1-4 4H9l-6 2 2-6V7a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+                Alert / Toast / Modal
+              </div>
+              <div class="sw-menu__item" data-target="sec-utility">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 17l-6.4 4.2L8 14l-6-4.8h7.6L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+                Result / Spin / Notice
+              </div>
+              <div class="sw-menu__item" data-target="sec-popover">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 12h.01M12 12h.01M16 12h.01" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2"/></svg></span>
+                Popover / Tooltip
+              </div>
+            </div>
+
+          </nav>
+        </div>
+      </aside>
+
+      <!-- 移动端遮罩 -->
+      <div class="sw-backdrop" aria-hidden="true"></div>
+
+      <!-- ===== 主区域 ===== -->
+      <main class="sw-main">
+        <header class="sw-header" aria-label="顶部栏">
+          <div class="sw-header__left">
+            <button id="swSiderOpen" class="sw-sider__toggle" aria-label="打开菜单">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <div class="sw-breadcrumb" aria-label="面包屑">
+              <a href="#sec-overview">sw-ui</a>
+              <span class="sw-breadcrumb__sep">/</span>
+              <span>组件预览</span>
+            </div>
+          </div>
+          <div class="sw-header__right">
+            <button id="swThemeToggle" class="sw-iconbtn" title="切换主题" aria-label="切换主题">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3a7 7 0 1 0 9 9 8.5 8.5 0 0 1-9-9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </button>
+            <button id="swDemoNotify" class="sw-iconbtn" title="触发通知" aria-label="触发通知">
+              <span class="sw-badge">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2Z" stroke="currentColor" stroke-width="2"/><path d="M18 16H6l1-1v-5a5 5 0 0 1 10 0v5l1 1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                <span class="sw-badge__dot" aria-hidden="true"></span>
+              </span>
+            </button>
+            <div class="sw-dd" data-open="false">
+              <button class="sw-iconbtn" data-dd-toggle="true" aria-label="用户菜单" title="用户菜单">
+                <span class="sw-badge"><div class="sw-avatar" aria-hidden="true"></div><span class="sw-badge__count" aria-hidden="true">8</span></span>
+              </button>
+              <div class="sw-dd__menu" role="menu" aria-label="用户菜单">
+                <div class="sw-dd__item" role="menuitem">
+                  <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/><path d="M4 20a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                  个人中心
+                </div>
+                <div class="sw-dd__item" role="menuitem">
+                  <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.2 6.7H21l-5.4 3.9 2 6.9L12 15.9 6.4 19.5l2-6.9L3 8.7h6.8L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+                  偏好设置
+                </div>
+                <div class="sw-dd__sep" aria-hidden="true"></div>
+                <div class="sw-dd__item" role="menuitem" id="swDemoError">
+                  <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 9v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M10.3 4.6a2 2 0 0 1 3.4 0l8 14a2 2 0 0 1-1.7 3H4a2 2 0 0 1-1.7-3l8-14Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+                  触发错误提示
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="sw-content" aria-label="内容区">
+          <div class="sw-page">
+
+            <!-- ===== Overview ===== -->
+            <div id="sec-overview" class="sw-card">
+              <div class="sw-card__hd">
+                <div>
+                  <h1 class="sw-h1">sw-ui 企业级组件库</h1>
+                  <p class="sw-desc">对齐 Ant Design Pro 视觉语义，CSS Tokens + 语义化 class，框架无关，零依赖。支持亮色/暗色主题，60+ 组件覆盖中后台全场景。</p>
+                </div>
+                <div class="sw-row sw-gap-sm">
+                  <button class="sw-btn sw-btn--primary" id="swOpenDrawer">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    打开抽屉
+                  </button>
+                  <button class="sw-btn" id="swOpenModal">打开弹窗</button>
+                </div>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-4 sw-card" style="border-radius:16px">
+                    <div class="sw-card__bd">
+                      <div class="sw-kpi"><div class="sw-kpi__label">本周活跃用户</div><div class="sw-kpi__value">48,120</div><div class="sw-kpi__delta sw-kpi__delta--up"><span aria-hidden="true">▲</span> +12.4% <span class="sw-muted">较上周</span></div></div>
+                      <div class="sw-divider"></div>
+                      <div class="sw-progress" aria-label="进度条"><div class="sw-progress__bar" style="--v:68%"></div></div>
+                      <div class="sw-row sw-gap-xs" style="margin-top:10px"><span class="sw-tag sw-tag--blue">增长</span><span class="sw-tag">看板示例</span></div>
+                    </div>
+                  </div>
+                  <div class="sw-col-4 sw-card" style="border-radius:16px">
+                    <div class="sw-card__bd">
+                      <div class="sw-kpi"><div class="sw-kpi__label">错误率</div><div class="sw-kpi__value">0.18%</div><div class="sw-kpi__delta sw-kpi__delta--down"><span aria-hidden="true">▼</span> -0.06% <span class="sw-muted">较昨日</span></div></div>
+                      <div class="sw-divider"></div>
+                      <div class="sw-alert sw-alert--info">
+                        <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-primary)" stroke-width="2"/><path d="M12 7v6" stroke="var(--sw-primary)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-primary)" stroke-width="3" stroke-linecap="round"/></svg></div>
+                        <div><p class="sw-alert__title">提示</p><p class="sw-alert__desc">这是一个更接近 Pro 的信息提示样式（示例）。</p></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-4 sw-card" style="border-radius:16px">
+                    <div class="sw-card__bd">
+                      <div class="sw-kpi"><div class="sw-kpi__label">转化率</div><div class="sw-kpi__value">3.62%</div><div class="sw-kpi__delta"><span class="sw-muted">今日波动正常</span></div></div>
+                      <div class="sw-divider"></div>
+                      <div class="sw-steps" aria-label="步骤条">
+                        <div class="sw-step" aria-current="false"><div class="sw-step__n">1</div><div class="sw-step__t"><div class="sw-step__title">创建</div><div class="sw-step__desc">Draft</div></div></div>
+                        <div class="sw-step" aria-current="true"><div class="sw-step__n">2</div><div class="sw-step__t"><div class="sw-step__title">审核</div><div class="sw-step__desc">Reviewing</div></div></div>
+                        <div class="sw-step" aria-current="false"><div class="sw-step__n">3</div><div class="sw-step__t"><div class="sw-step__title">发布</div><div class="sw-step__desc">Published</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sw-card__ft">
+                <button class="sw-btn sw-btn--ghost">取消</button>
+                <button class="sw-btn sw-btn--primary">保存</button>
+              </div>
+            </div>
+
+            <!-- ===== Tokens ===== -->
+            <div id="sec-tokens" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">设计令牌（Tokens）</h2><p class="sw-desc">以 CSS 变量形式提供，便于全局换肤/二次开发。</p></div>
+                <span class="sw-tag sw-tag--blue">./styles/tokens.css</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-row sw-gap-sm">
+                      <span class="sw-tag sw-tag--blue">--sw-primary</span>
+                      <span class="sw-tag sw-tag--green">--sw-success</span>
+                      <span class="sw-tag sw-tag--gold">--sw-warning</span>
+                      <span class="sw-tag sw-tag--red">--sw-error</span>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <pre class="sw-code"><code>/* 关键 Token（摘录） */
+:root{
+  --sw-primary: #1677ff;
+  --sw-bg-layout: #f0f2f5;
+  --sw-radius: 6px;
+  --sw-shadow-2: 0 6px 16px rgba(0,0,0,.08);
+  --sw-sider-w: 248px;
+  --sw-header-h: 56px;
+}</code></pre>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-alert sw-alert--warning">
+                      <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 9v4" stroke="var(--sw-warning)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-warning)" stroke-width="3" stroke-linecap="round"/><path d="M10.3 4.6a2 2 0 0 1 3.4 0l8 14a2 2 0 0 1-1.7 3H4a2 2 0 0 1-1.7-3l8-14Z" stroke="var(--sw-warning)" stroke-width="2" stroke-linejoin="round"/></svg></div>
+                      <div><p class="sw-alert__title">兼容性说明</p><p class="sw-alert__desc">本库不依赖 React/Antd，仅复用 Pro 的视觉语义；交互以原生 JS 实现，适合快速原型/中后台页面静态化。</p></div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-row">
+                      <div class="sw-card" style="padding:12px 14px;border-radius:16px;flex:1"><div class="sw-muted" style="font-size:12px">暗色主题</div><div style="font-weight:700;margin-top:4px">一键切换（右上角）</div></div>
+                      <div class="sw-card" style="padding:12px 14px;border-radius:16px;flex:1"><div class="sw-muted" style="font-size:12px">移动端适配</div><div style="font-weight:700;margin-top:4px">侧边栏抽屉化</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Buttons ===== -->
+            <div id="sec-buttons" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Button 按钮</h2><p class="sw-desc">Primary / Default / Ghost / Link / Danger + Size + Icon。</p></div>
+                <span class="sw-tag">.sw-btn</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-row">
+                  <button class="sw-btn sw-btn--primary">Primary</button>
+                  <button class="sw-btn">Default</button>
+                  <button class="sw-btn sw-btn--ghost">Ghost</button>
+                  <button class="sw-btn sw-btn--link">Link</button>
+                  <button class="sw-btn sw-btn--danger">Danger</button>
+                  <button class="sw-btn" disabled>Disabled</button>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-row">
+                  <button class="sw-btn sw-btn--primary sw-btn--sm">Small</button>
+                  <button class="sw-btn sw-btn--primary">Middle</button>
+                  <button class="sw-btn sw-btn--primary sw-btn--lg">Large</button>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-row">
+                  <button class="sw-btn sw-btn--primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    新增
+                  </button>
+                  <button class="sw-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    导出
+                  </button>
+                  <button class="sw-btn sw-btn--danger">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    删除
+                  </button>
+                  <button class="sw-btn sw-btn--ghost">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    编辑
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Typography ===== -->
+            <div id="sec-typography" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Typography 排版</h2><p class="sw-desc">标题层级、文本变体、引用块、代码片段。</p></div>
+                <span class="sw-tag">.sw-h1-typo .sw-text-*</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                      <div class="sw-h1-typo">H1 标题 / 38px</div>
+                      <div class="sw-h2-typo">H2 标题 / 30px</div>
+                      <div class="sw-h3-typo">H3 标题 / 24px</div>
+                      <div class="sw-h4-typo">H4 标题 / 20px</div>
+                      <div class="sw-h5-typo">H5 标题 / 16px</div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-blockquote">这是一段引用文字，用于强调重要内容或引用外部来源，保持视觉层次清晰。</div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+                      <div>普通文本 <span class="sw-text-secondary">次要文本</span> <span class="sw-text-tertiary">辅助文本</span></div>
+                      <div><span class="sw-text-primary">主色文本</span> <span class="sw-text-success">成功文本</span> <span class="sw-text-warning">警告文本</span> <span class="sw-text-error">错误文本</span></div>
+                      <div><span class="sw-text-bold">加粗文本</span> <span class="sw-text-del">删除线文本</span> <span class="sw-text-underline">下划线文本</span></div>
+                      <div>高亮 <span class="sw-text-mark">标记文本</span> 示例</div>
+                      <div>内联代码 <code class="sw-text-code">const x = 42;</code> 示例</div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <pre class="sw-code"><code>/* 文本工具类 */
+.sw-text-primary   { color: var(--sw-primary); }
+.sw-text-secondary { color: var(--sw-text-secondary); }
+.sw-text-mark      { background: ...; }
+.sw-blockquote     { border-left: 3px solid ...; }</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Tag / Badge / Avatar ===== -->
+            <div id="sec-icon" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Tag / Badge / Avatar</h2><p class="sw-desc">标签（可关闭/可添加）、徽标、头像组、状态点。</p></div>
+                <span class="sw-tag">.sw-tag .sw-badge .sw-avatar</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:10px;font-size:13px;color:var(--sw-text-tertiary)">Tag 标签</div>
+                    <div class="sw-row sw-gap-sm" style="flex-wrap:wrap">
+                      <span class="sw-tag">默认</span>
+                      <span class="sw-tag sw-tag--blue">蓝色</span>
+                      <span class="sw-tag sw-tag--green">绿色</span>
+                      <span class="sw-tag sw-tag--gold">金色</span>
+                      <span class="sw-tag sw-tag--red">红色</span>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-row sw-gap-sm" style="flex-wrap:wrap">
+                      <span class="sw-tag sw-tag--blue sw-tag--closable">可关闭<button class="sw-tag__close" aria-label="关闭"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button></span>
+                      <span class="sw-tag sw-tag--green sw-tag--closable">标签二<button class="sw-tag__close" aria-label="关闭"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button></span>
+                      <span class="sw-tag sw-tag--add">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        添加标签
+                      </span>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-h2" style="margin-bottom:10px;font-size:13px;color:var(--sw-text-tertiary)">Dot 状态点</div>
+                    <div style="display:flex;gap:16px;flex-wrap:wrap">
+                      <span class="sw-dot-status sw-dot-status--success">运行中</span>
+                      <span class="sw-dot-status sw-dot-status--error">已停止</span>
+                      <span class="sw-dot-status sw-dot-status--warning">异常</span>
+                      <span class="sw-dot-status sw-dot-status--info">信息</span>
+                      <span class="sw-dot-status sw-dot-status--processing">处理中</span>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:10px;font-size:13px;color:var(--sw-text-tertiary)">Avatar 头像组</div>
+                    <div class="sw-avatar-group" style="margin-bottom:12px">
+                      <div class="sw-avatar" style="width:36px;height:36px"></div>
+                      <div class="sw-avatar" style="width:36px;height:36px;background:linear-gradient(135deg,#13c2c2,#69b1ff)"></div>
+                      <div class="sw-avatar" style="width:36px;height:36px;background:linear-gradient(135deg,#ff7875,#ffd666)"></div>
+                      <div class="sw-avatar" style="width:36px;height:36px;background:linear-gradient(135deg,#722ed1,#b37feb)"></div>
+                      <div class="sw-avatar-group__more">+8</div>
+                    </div>
+                    <div class="sw-muted" style="font-size:12px;margin-bottom:16px">李雷、韩梅梅、张三 等 12 人已加入</div>
+                    <div class="sw-h2" style="margin-bottom:10px;font-size:13px;color:var(--sw-text-tertiary)">Badge 徽标</div>
+                    <div class="sw-row sw-gap-sm">
+                      <span class="sw-badge"><button class="sw-btn">消息<span class="sw-badge__count">5</span></button></span>
+                      <span class="sw-badge"><button class="sw-btn sw-btn--ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2Z" stroke="currentColor" stroke-width="2"/><path d="M18 16H6l1-1v-5a5 5 0 0 1 10 0v5l1 1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="sw-badge__dot"></span></button></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Layout ===== -->
+            <div id="sec-layout" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Layout 布局（中后台常见组合）</h2><p class="sw-desc">「查询区 + 结果区」：适合列表页、权限页、订单页等。可直接拷贝结构与 class。</p></div>
+                <span class="sw-tag sw-tag--blue">可复用模板</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-card" style="border-radius:16px">
+                  <div class="sw-card__hd">
+                    <div><div class="sw-h2">查询条件</div><div class="sw-desc">示例：通常 2~4 列栅格，移动端自动换行。</div></div>
+                    <div class="sw-row sw-gap-sm"><button class="sw-btn sw-btn--ghost">重置</button><button class="sw-btn sw-btn--primary">查询</button></div>
+                  </div>
+                  <div class="sw-card__bd">
+                    <div class="sw-grid">
+                      <div class="sw-col-3 sw-field"><div class="sw-label">关键词</div><input class="sw-input" placeholder="名称 / ID / 邮箱" /></div>
+                      <div class="sw-col-3 sw-field">
+                        <div class="sw-label">状态</div>
+                        <div class="sw-select" data-open="false">
+                          <div class="sw-select__btn" role="button" aria-haspopup="listbox" aria-expanded="false">
+                            <span class="sw-select__value sw-select__muted">全部</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </div>
+                          <div class="sw-select__menu" role="listbox">
+                            <div class="sw-option" role="option" aria-selected="true" data-value="全部">全部</div>
+                            <div class="sw-option" role="option" aria-selected="false" data-value="Enabled">Enabled</div>
+                            <div class="sw-option" role="option" aria-selected="false" data-value="Disabled">Disabled</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="sw-col-3 sw-field"><div class="sw-label">负责人</div><input class="sw-input" placeholder="输入用户名" /></div>
+                      <div class="sw-col-3 sw-field"><div class="sw-label">更新时间</div><input class="sw-input" placeholder="YYYY-MM-DD ~ YYYY-MM-DD" /></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-card" style="border-radius:16px">
+                  <div class="sw-card__hd">
+                    <div><div class="sw-h2">查询结果</div><div class="sw-desc">建议搭配「新增」主按钮 + 表格操作列。</div></div>
+                    <div class="sw-row sw-gap-sm"><button class="sw-btn">导出</button><button class="sw-btn sw-btn--primary">新增</button></div>
+                  </div>
+                  <div class="sw-card__bd">
+                    <div class="sw-table-wrap">
+                      <table class="sw-table" aria-label="结果表格">
+                        <thead><tr><th>名称</th><th>类型</th><th>状态</th><th>创建人</th><th>创建时间</th><th style="width:160px">操作</th></tr></thead>
+                        <tbody>
+                          <tr><td style="font-weight:650">payment_v2</td><td>Feature Flag</td><td><span class="sw-tag sw-tag--green">Enabled</span></td><td class="sw-muted">admin</td><td class="sw-muted">2026-05-10</td><td><div class="sw-row-actions"><a href="javascript:void(0)">编辑</a><a href="javascript:void(0)">复制</a></div></td></tr>
+                          <tr><td style="font-weight:650">risk_guard</td><td>Rule Set</td><td><span class="sw-tag sw-tag--gold">Pending</span></td><td class="sw-muted">ops</td><td class="sw-muted">2026-05-08</td><td><div class="sw-row-actions"><a href="javascript:void(0)">审核</a><a href="javascript:void(0)">详情</a></div></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-pagination"><span class="sw-muted" style="margin-right:auto;font-size:12px">共 2 条</span><button class="sw-pagebtn" aria-label="上一页">‹</button><button class="sw-pagebtn" aria-current="true">1</button><button class="sw-pagebtn" aria-label="下一页">›</button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Card ===== -->
+            <div id="sec-card" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Card 卡片变体</h2><p class="sw-desc">默认 / 可悬停 / 内嵌 / 无边框 / 带封面 / Meta 卡片。</p></div>
+                <span class="sw-tag">.sw-card--hoverable .sw-card--inner</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-4 sw-card sw-card--hoverable" style="border-radius:16px">
+                    <div class="sw-card__bd">
+                      <div class="sw-kpi"><div class="sw-kpi__label">可悬停卡片</div><div class="sw-kpi__value" style="font-size:16px">Hoverable</div></div>
+                      <div class="sw-muted" style="font-size:12px;margin-top:8px">鼠标悬停时浮起，适合列表/网格展示。</div>
+                    </div>
+                  </div>
+                  <div class="sw-col-4">
+                    <div class="sw-card sw-card--inner" style="border-radius:16px">
+                      <div class="sw-card__bd">
+                        <div class="sw-kpi"><div class="sw-kpi__label">内嵌卡片</div><div class="sw-kpi__value" style="font-size:16px">Inner</div></div>
+                        <div class="sw-muted" style="font-size:12px;margin-top:8px">背景为布局色，适合嵌套在卡片内部。</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-4 sw-card" style="border-radius:16px;overflow:hidden;padding:0">
+                    <div class="sw-card__cover"><div style="width:100%;height:120px;background:linear-gradient(135deg,#1677ff,#69b1ff);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;opacity:.85">封面图片区域</div></div>
+                    <div class="sw-card__meta">
+                      <div class="sw-card__meta-avatar"><div class="sw-avatar" style="width:40px;height:40px"></div></div>
+                      <div class="sw-card__meta-detail">
+                        <div class="sw-card__meta-title">项目 Alpha</div>
+                        <div class="sw-card__meta-desc">中后台管理系统前端框架</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Divider / Space ===== -->
+            <div id="sec-divider" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Divider / Space</h2><p class="sw-desc">带文字分割线、Space 间距容器。</p></div>
+                <span class="sw-tag">.sw-divider--text .sw-space</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Divider 带文字</div>
+                    <div class="sw-divider--text">居中文字</div>
+                    <div class="sw-divider--text sw-divider--left">左对齐</div>
+                    <div class="sw-divider--text sw-divider--right">右对齐</div>
+                    <div class="sw-divider--text"><span class="sw-tag sw-tag--blue">标签分割</span></div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Space 间距</div>
+                    <div class="sw-space sw-space--xs" style="margin-bottom:12px">
+                      <button class="sw-btn sw-btn--sm">XS</button><button class="sw-btn sw-btn--sm">间距</button><button class="sw-btn sw-btn--sm">示例</button>
+                    </div>
+                    <div class="sw-space sw-space--md" style="margin-bottom:12px">
+                      <button class="sw-btn">MD</button><button class="sw-btn">间距</button><button class="sw-btn">示例</button>
+                    </div>
+                    <div class="sw-space sw-space--vertical sw-space--sm">
+                      <span class="sw-tag sw-tag--blue">垂直</span>
+                      <span class="sw-tag sw-tag--green">排列</span>
+                      <span class="sw-tag sw-tag--gold">示例</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Menu ===== -->
+            <div id="sec-menu" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Menu 菜单</h2><p class="sw-desc">垂直菜单（含子菜单展开）、水平菜单（顶部导航）。</p></div>
+                <span class="sw-tag">.sw-menu .sw-menu--horizontal</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-4">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">垂直菜单（含子菜单）</div>
+                    <div class="sw-menu" style="background:var(--sw-bg-elevated);border:1px solid var(--sw-split);border-radius:14px;padding:8px">
+                      <div class="sw-menu__item" aria-current="page">
+                        <span class="sw-menu__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 11.5V20h16v-8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3l9 8H3l9-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+                        首页
+                      </div>
+                      <div class="sw-menu__item" aria-expanded="true">
+                        <span class="sw-menu__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                        订单管理
+                        <span class="sw-menu__item-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      </div>
+                      <div class="sw-menu__sub">
+                        <div class="sw-menu__item">订单列表</div>
+                        <div class="sw-menu__item">退款管理</div>
+                      </div>
+                      <div class="sw-menu__item" aria-expanded="false">
+                        <span class="sw-menu__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/><path d="M4 20a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                        用户管理
+                        <span class="sw-menu__item-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      </div>
+                      <div class="sw-menu__sub">
+                        <div class="sw-menu__item">用户列表</div>
+                        <div class="sw-menu__item">权限配置</div>
+                      </div>
+                      <div class="sw-menu__item">
+                        <span class="sw-menu__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.2 6.7H21l-5.4 3.9 2 6.9L12 15.9 6.4 19.5l2-6.9L3 8.7h6.8L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+                        系统设置
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-8">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">水平菜单（顶部导航）</div>
+                    <div class="sw-menu sw-menu--horizontal" style="background:var(--sw-bg-elevated);border-radius:14px 14px 0 0;padding:0 8px">
+                      <div class="sw-menu__item" aria-current="page">首页</div>
+                      <div class="sw-menu__item">订单管理</div>
+                      <div class="sw-menu__item">商品管理</div>
+                      <div class="sw-menu__item">数据报表</div>
+                      <div class="sw-menu__item">系统设置</div>
+                    </div>
+                    <div style="padding:16px;border:1px solid var(--sw-split);border-top:none;border-radius:0 0 14px 14px;background:var(--sw-bg-elevated)">
+                      <div class="sw-muted" style="font-size:12px">当前页面内容区域（示例）</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Breadcrumb / Anchor ===== -->
+            <div id="sec-breadcrumb" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Breadcrumb / Anchor</h2><p class="sw-desc">面包屑导航、锚点侧边导航。</p></div>
+                <span class="sw-tag">.sw-breadcrumb .sw-anchor</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Breadcrumb 面包屑</div>
+                    <div class="sw-breadcrumb" style="font-size:13px;margin-bottom:12px">
+                      <a href="javascript:void(0)">首页</a><span class="sw-breadcrumb__sep">/</span>
+                      <a href="javascript:void(0)">订单管理</a><span class="sw-breadcrumb__sep">/</span>
+                      <span style="color:var(--sw-text);font-weight:650">订单详情</span>
+                    </div>
+                    <div class="sw-breadcrumb sw-breadcrumb--lg">
+                      <span class="sw-breadcrumb__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 11.5V20h16v-8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 3l9 8H3l9-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><a href="javascript:void(0)">首页</a></span>
+                      <span class="sw-breadcrumb__sep">/</span>
+                      <span class="sw-breadcrumb__item"><a href="javascript:void(0)">用户管理</a></span>
+                      <span class="sw-breadcrumb__sep">/</span>
+                      <span class="sw-breadcrumb__item sw-breadcrumb__item--current">用户详情</span>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Anchor 锚点导航</div>
+                    <div class="sw-anchor">
+                      <a class="sw-anchor__link sw-anchor__link--active" href="javascript:void(0)">概览</a>
+                      <a class="sw-anchor__link" href="javascript:void(0)">设计令牌</a>
+                      <a class="sw-anchor__link" href="javascript:void(0)">通用组件</a>
+                      <a class="sw-anchor__link sw-anchor__link--sub" href="javascript:void(0)">Button 按钮</a>
+                      <a class="sw-anchor__link sw-anchor__link--sub" href="javascript:void(0)">Typography 排版</a>
+                      <a class="sw-anchor__link" href="javascript:void(0)">数据录入</a>
+                      <a class="sw-anchor__link" href="javascript:void(0)">数据展示</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Tabs ===== -->
+            <div id="sec-tabs" class="sw-card" data-tabs-root="true">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Tabs 标签页</h2><p class="sw-desc">胶囊型 Tabs + 内容面板切换。</p></div>
+                <div class="sw-tabs" role="tablist" aria-label="示例 Tabs">
+                  <button class="sw-tab" role="tab" aria-selected="true" data-tab="tab-a">用户列表</button>
+                  <button class="sw-tab" role="tab" aria-selected="false" data-tab="tab-b">审计日志</button>
+                  <button class="sw-tab" role="tab" aria-selected="false" data-tab="tab-c">配置片段</button>
+                </div>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-tabpanel" data-active="true" data-tabpanel="tab-a">
+                  <div class="sw-alert sw-alert--success">
+                    <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-success)" stroke-width="2"/><path d="M7 12.5l3 3 7-7" stroke="var(--sw-success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <div><p class="sw-alert__title">查询成功</p><p class="sw-alert__desc">这里演示中后台常见的查询结果提示（示例）。</p></div>
+                  </div>
+                  <div class="sw-divider"></div>
+                  <div class="sw-table-wrap">
+                    <table class="sw-table" aria-label="用户表格">
+                      <thead><tr><th style="width:220px">用户</th><th>角色</th><th>状态</th><th>更新时间</th><th style="width:160px">操作</th></tr></thead>
+                      <tbody>
+                        <tr><td><div class="sw-row sw-gap-sm"><div class="sw-avatar" style="width:28px;height:28px"></div><div style="display:flex;flex-direction:column;gap:2px"><div style="font-weight:650">李雷</div><div class="sw-muted" style="font-size:12px">lilei@example.com</div></div></div></td><td><span class="sw-tag sw-tag--blue">Admin</span></td><td><span class="sw-tag sw-tag--green">Enabled</span></td><td class="sw-muted">2026-05-13 10:24</td><td><div class="sw-row-actions"><a href="javascript:void(0)">编辑</a><a href="javascript:void(0)" style="color:var(--sw-error)">删除</a></div></td></tr>
+                        <tr><td><div class="sw-row sw-gap-sm"><div class="sw-avatar" style="width:28px;height:28px;background:linear-gradient(135deg,#13c2c2,#69b1ff)"></div><div style="display:flex;flex-direction:column;gap:2px"><div style="font-weight:650">韩梅梅</div><div class="sw-muted" style="font-size:12px">hanmm@example.com</div></div></div></td><td><span class="sw-tag">Operator</span></td><td><span class="sw-tag sw-tag--gold">Pending</span></td><td class="sw-muted">2026-05-13 09:01</td><td><div class="sw-row-actions"><a href="javascript:void(0)">查看</a><a href="javascript:void(0)">重置</a></div></td></tr>
+                        <tr><td><div class="sw-row sw-gap-sm"><div class="sw-avatar" style="width:28px;height:28px;background:linear-gradient(135deg,#ff7875,#ffd666)"></div><div style="display:flex;flex-direction:column;gap:2px"><div style="font-weight:650">张三</div><div class="sw-muted" style="font-size:12px">zhangsan@example.com</div></div></div></td><td><span class="sw-tag">Viewer</span></td><td><span class="sw-tag sw-tag--red">Disabled</span></td><td class="sw-muted">2026-05-12 22:18</td><td><div class="sw-row-actions"><a href="javascript:void(0)">启用</a><a href="javascript:void(0)">详情</a></div></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="sw-divider"></div>
+                  <div class="sw-pagination" aria-label="分页"><button class="sw-pagebtn" aria-label="上一页">‹</button><button class="sw-pagebtn" aria-current="true">1</button><button class="sw-pagebtn">2</button><button class="sw-pagebtn">3</button><button class="sw-pagebtn" aria-label="下一页">›</button></div>
+                </div>
+                <div class="sw-tabpanel" data-active="false" data-tabpanel="tab-b">
+                  <div class="sw-table-wrap">
+                    <table class="sw-table" aria-label="审计日志表格">
+                      <thead><tr><th style="width:180px">时间</th><th>动作</th><th>对象</th><th>结果</th></tr></thead>
+                      <tbody>
+                        <tr><td class="sw-muted">10:02:11</td><td>更新策略</td><td>feature_flag/payment_v2</td><td><span class="sw-tag sw-tag--green">OK</span></td></tr>
+                        <tr><td class="sw-muted">09:58:36</td><td>删除用户</td><td>user/10291</td><td><span class="sw-tag sw-tag--red">Denied</span></td></tr>
+                        <tr><td class="sw-muted">09:40:03</td><td>创建应用</td><td>app/analytics</td><td><span class="sw-tag sw-tag--gold">Pending</span></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="sw-tabpanel" data-active="false" data-tabpanel="tab-c">
+                  <pre class="sw-code"><code>{"theme":"pro","tokens":{"primary":"#1677ff","radius":6},"components":["Button","Input","Select","Table","Tabs","Modal","Drawer","Toast"]}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Forms ===== -->
+            <div id="sec-forms" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Form 表单</h2><p class="sw-desc">输入框 / 文本域 / Select / Checkbox / Radio / Switch + 行内布局。</p></div>
+                <span class="sw-tag">.sw-input .sw-select .sw-switch</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-field">
+                      <div class="sw-label"><span class="sw-label__req">*</span>用户名</div>
+                      <input class="sw-input" placeholder="请输入用户名" value="admin" />
+                      <div class="sw-help">建议使用工号或邮箱前缀。</div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-field">
+                      <div class="sw-label">描述</div>
+                      <textarea class="sw-textarea" placeholder="这里是多行输入...">这是一段示例内容，用于展示输入密度与边框样式。</textarea>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-input-group">
+                      <input class="sw-input" placeholder="搜索关键词" />
+                      <button class="sw-btn sw-btn--primary">搜索</button>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-field">
+                      <div class="sw-label">城市</div>
+                      <div class="sw-select" data-open="false">
+                        <div class="sw-select__btn" role="button" aria-haspopup="listbox" aria-expanded="false">
+                          <span class="sw-select__value sw-select__muted">请选择</span>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="sw-select__menu" role="listbox" aria-label="城市选择">
+                          <div class="sw-option" role="option" aria-selected="false" data-value="北京">北京</div>
+                          <div class="sw-option" role="option" aria-selected="false" data-value="上海">上海</div>
+                          <div class="sw-option" role="option" aria-selected="true" data-value="深圳">深圳 <span class="sw-tag sw-tag--blue">默认</span></div>
+                          <div class="sw-option" role="option" aria-selected="false" data-value="杭州">杭州</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-field">
+                      <div class="sw-label">偏好</div>
+                      <div class="sw-checkrow">
+                        <label class="sw-check"><input type="checkbox" checked /><span class="sw-box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>邮件通知</span></label>
+                        <label class="sw-check"><input type="checkbox" /><span class="sw-box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>短信通知</span></label>
+                        <label class="sw-check"><input type="checkbox" disabled /><span class="sw-box" aria-hidden="true"></span><span>禁用项</span></label>
+                      </div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-field">
+                      <div class="sw-label">发布策略</div>
+                      <div class="sw-checkrow">
+                        <label class="sw-check"><input type="radio" name="r1" checked /><span class="sw-dot" aria-hidden="true"></span><span>灰度</span></label>
+                        <label class="sw-check"><input type="radio" name="r1" /><span class="sw-dot" aria-hidden="true"></span><span>全量</span></label>
+                      </div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-row sw-row--between">
+                      <div><div class="sw-label">高级开关</div><div class="sw-help">点击切换（示例）。</div></div>
+                      <div class="sw-switch" role="switch" aria-checked="true" aria-disabled="false"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sw-divider--text">行内表单布局</div>
+                <div class="sw-form--inline">
+                  <div class="sw-field"><div class="sw-label">关键词</div><input class="sw-input" placeholder="搜索..." /></div>
+                  <div class="sw-field"><div class="sw-label">状态</div><input class="sw-input" placeholder="全部" /></div>
+                  <div class="sw-field"><div class="sw-label">日期</div><input class="sw-input" placeholder="YYYY-MM-DD" /></div>
+                  <div style="padding-top:20px"><button class="sw-btn sw-btn--primary">查询</button></div>
+                </div>
+              </div>
+              <div class="sw-card__ft">
+                <button class="sw-btn sw-btn--ghost">重置</button>
+                <button class="sw-btn sw-btn--primary">提交</button>
+              </div>
+            </div>
+
+            <!-- ===== InputNumber / Slider ===== -->
+            <div id="sec-input-ext" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">InputNumber / Slider</h2><p class="sw-desc">数字输入框（步进）、滑块（带刻度标记）。</p></div>
+                <span class="sw-tag">.sw-input-number .sw-slider</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">InputNumber 数字输入框</div>
+                    <div class="sw-field">
+                      <div class="sw-label">数量</div>
+                      <div class="sw-input-number" id="inNum1">
+                        <button class="sw-input-number__btn" data-in-dec="inNum1" aria-label="减少">−</button>
+                        <input class="sw-input-number__input" type="number" value="1" min="0" max="99" />
+                        <button class="sw-input-number__btn" data-in-inc="inNum1" aria-label="增加">+</button>
+                      </div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-field">
+                      <div class="sw-label">价格（¥）</div>
+                      <div class="sw-input-number" id="inNum2">
+                        <button class="sw-input-number__btn" data-in-dec="inNum2" aria-label="减少">−</button>
+                        <input class="sw-input-number__input" type="number" value="100" min="0" step="10" style="width:100px" />
+                        <button class="sw-input-number__btn" data-in-inc="inNum2" aria-label="增加">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Slider 滑块</div>
+                    <div class="sw-slider" id="slider1">
+                      <div class="sw-slider__track-wrap">
+                        <div class="sw-slider__track">
+                          <div class="sw-slider__fill" style="width:60%"></div>
+                        </div>
+                        <div class="sw-slider__thumb" style="left:60%" tabindex="0" role="slider" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="sw-slider__marks"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+                      <div class="sw-slider__value">当前值：60</div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-slider" id="slider2">
+                      <div class="sw-slider__track-wrap">
+                        <div class="sw-slider__track">
+                          <div class="sw-slider__fill" style="width:30%"></div>
+                        </div>
+                        <div class="sw-slider__thumb" style="left:30%" tabindex="0" role="slider" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="sw-slider__marks"><span>低</span><span>中</span><span>高</span></div>
+                      <div class="sw-slider__value">当前值：30</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== DatePicker / TimePicker ===== -->
+            <div id="sec-datetime" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">日期 &amp; 时间选择器</h2><p class="sw-desc">DatePicker 单日期、DateRangePicker 日期范围、TimePicker 时间选择（时/分/秒滚动列）。</p></div>
+                <span class="sw-tag sw-tag--blue">.sw-datepicker .sw-timepicker</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-4">
+                    <div class="sw-field">
+                      <div class="sw-label">生效日期</div>
+                      <div class="sw-datepicker" id="dp1" data-open="false">
+                        <div class="sw-datepicker__input" role="button" aria-haspopup="true" aria-expanded="false">
+                          <span class="sw-datepicker__input-text sw-datepicker__input-text--placeholder" id="dp1-text">请选择日期</span>
+                          <span class="sw-datepicker__input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                        </div>
+                        <div class="sw-datepicker__panel" id="dp1-panel">
+                          <div class="sw-cal" id="dp1-cal" data-mode="single"></div>
+                          <div class="sw-datepicker__footer">
+                            <button class="sw-datepicker__footer-link" data-dp-today="dp1">今天</button>
+                            <button class="sw-btn sw-btn--primary sw-btn--sm" data-dp-ok="dp1">确定</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-4">
+                    <div class="sw-field">
+                      <div class="sw-label">提醒时间</div>
+                      <div class="sw-timepicker" id="tp1" data-open="false">
+                        <div class="sw-timepicker__input" role="button" aria-haspopup="true" aria-expanded="false">
+                          <span class="sw-timepicker__input-text sw-timepicker__input-text--placeholder" id="tp1-text">请选择时间</span>
+                          <span class="sw-timepicker__input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        </div>
+                        <div class="sw-timepicker__panel" id="tp1-panel">
+                          <div class="sw-timepicker__columns" id="tp1-cols"></div>
+                          <div class="sw-timepicker__footer">
+                            <button class="sw-timepicker__now" data-tp-now="tp1">此刻</button>
+                            <button class="sw-timepicker__ok" data-tp-ok="tp1">确 定</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-4"></div>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-field">
+                  <div class="sw-label">起止日期</div>
+                  <div class="sw-datepicker" id="drp1" data-open="false" style="max-width:420px">
+                    <div class="sw-datepicker__input" role="button" aria-haspopup="true" aria-expanded="false">
+                      <span class="sw-datepicker__input-text sw-datepicker__input-text--placeholder" id="drp1-start">开始日期</span>
+                      <span class="sw-datepicker__input-sep">→</span>
+                      <span class="sw-datepicker__input-text sw-datepicker__input-text--placeholder" id="drp1-end">结束日期</span>
+                      <span class="sw-datepicker__input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                    </div>
+                    <div class="sw-datepicker__panel sw-datepicker__panel--range" id="drp1-panel">
+                      <div class="sw-cal" id="drp1-cal-l" data-mode="range-left"></div>
+                      <div class="sw-cal" id="drp1-cal-r" data-mode="range-right"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Cascader / Transfer ===== -->
+            <div id="sec-cascader" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Cascader / Transfer</h2><p class="sw-desc">级联选择器（三级联动）、穿梭框（双列选择）。</p></div>
+                <span class="sw-tag">.sw-cascader .sw-transfer</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Cascader 级联选择</div>
+                    <div class="sw-field">
+                      <div class="sw-label">所在地区</div>
+                      <div class="sw-cascader" id="cas1" data-open="false">
+                        <div class="sw-cascader__input" role="button" aria-haspopup="true" aria-expanded="false">
+                          <span id="cas1-text" style="color:var(--sw-text-tertiary);font-size:13px">请选择省 / 市 / 区</span>
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="sw-cascader__panel">
+                          <div class="sw-cascader__col">
+                            <div class="sw-cascader__item sw-cascader__item--active" data-cas-l1="广东省">广东省 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                            <div class="sw-cascader__item" data-cas-l1="浙江省">浙江省 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                            <div class="sw-cascader__item" data-cas-l1="北京市">北京市</div>
+                          </div>
+                          <div class="sw-cascader__col">
+                            <div class="sw-cascader__item sw-cascader__item--active" data-cas-l2="深圳市">深圳市 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                            <div class="sw-cascader__item" data-cas-l2="广州市">广州市 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                          </div>
+                          <div class="sw-cascader__col">
+                            <div class="sw-cascader__item" data-cas-l3="南山区">南山区</div>
+                            <div class="sw-cascader__item sw-cascader__item--selected" data-cas-l3="福田区">福田区</div>
+                            <div class="sw-cascader__item" data-cas-l3="宝安区">宝安区</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Transfer 穿梭框</div>
+                    <div class="sw-transfer">
+                      <div class="sw-transfer__panel">
+                        <div class="sw-transfer__panel-hd"><span>待选列表</span><span class="sw-muted" style="font-size:12px">3 项</span></div>
+                        <div class="sw-transfer__panel-bd" id="transferSource">
+                          <div class="sw-transfer__item" data-key="1"><span>李雷</span></div>
+                          <div class="sw-transfer__item" data-key="2"><span>韩梅梅</span></div>
+                          <div class="sw-transfer__item" data-key="3"><span>张三</span></div>
+                        </div>
+                      </div>
+                      <div class="sw-transfer__ops">
+                        <button class="sw-transfer__op-btn" id="transferRight" aria-label="移入右侧"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                        <button class="sw-transfer__op-btn" id="transferLeft" aria-label="移入左侧"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                      </div>
+                      <div class="sw-transfer__panel">
+                        <div class="sw-transfer__panel-hd"><span>已选列表</span><span class="sw-muted" style="font-size:12px">0 项</span></div>
+                        <div class="sw-transfer__panel-bd" id="transferTarget"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Upload / Rate / Segmented ===== -->
+            <div id="sec-entry" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Upload / Rate / Segmented</h2><p class="sw-desc">文件上传、评分、分段控制器。</p></div>
+                <span class="sw-tag sw-tag--blue">3 components</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Segmented 分段控制器</div>
+                    <div class="sw-segmented" role="radiogroup" aria-label="视图切换" style="margin-bottom:12px">
+                      <button class="sw-segmented__item" aria-selected="true" role="radio">列表视图</button>
+                      <button class="sw-segmented__item" aria-selected="false" role="radio">卡片视图</button>
+                      <button class="sw-segmented__item" aria-selected="false" role="radio">看板视图</button>
+                    </div>
+                    <div class="sw-segmented" role="radiogroup" aria-label="时间粒度">
+                      <button class="sw-segmented__item" aria-selected="true" role="radio">日</button>
+                      <button class="sw-segmented__item" aria-selected="false" role="radio">周</button>
+                      <button class="sw-segmented__item" aria-selected="false" role="radio">月</button>
+                      <button class="sw-segmented__item" aria-selected="false" role="radio">年</button>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Rate 评分</div>
+                    <div class="sw-rate" role="radiogroup" aria-label="评分">
+                      <span class="sw-rate__star sw-rate__star--filled" data-value="1"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 17l-6.4 4.2L8 14l-6-4.8h7.6L12 2Z"/></svg></span>
+                      <span class="sw-rate__star sw-rate__star--filled" data-value="2"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 17l-6.4 4.2L8 14l-6-4.8h7.6L12 2Z"/></svg></span>
+                      <span class="sw-rate__star sw-rate__star--filled" data-value="3"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 17l-6.4 4.2L8 14l-6-4.8h7.6L12 2Z"/></svg></span>
+                      <span class="sw-rate__star sw-rate__star--filled" data-value="4"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 17l-6.4 4.2L8 14l-6-4.8h7.6L12 2Z"/></svg></span>
+                      <span class="sw-rate__star" data-value="5"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 17l-6.4 4.2L8 14l-6-4.8h7.6L12 2Z"/></svg></span>
+                      <span class="sw-rate__text">4.0</span>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Upload 上传</div>
+                    <div class="sw-upload">
+                      <div class="sw-upload__area" role="button" aria-label="上传文件">
+                        <div class="sw-upload__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 3v14m-5-5l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17v3h18v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <div class="sw-upload__text">点击或拖拽文件到此处上传</div>
+                        <div class="sw-upload__hint">支持 PNG / JPG / PDF，单文件不超过 10MB</div>
+                      </div>
+                      <div class="sw-upload__list">
+                        <div class="sw-upload__file">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4Z" stroke="currentColor" stroke-width="2"/><path d="M8 12h8M8 8h5M8 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                          <span class="sw-upload__file-name">screenshot-2026.png</span>
+                          <span class="sw-upload__file-status sw-upload__file-status--done">✓ 已完成</span>
+                          <button class="sw-upload__file-remove" aria-label="移除"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+                        </div>
+                        <div class="sw-upload__file">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4Z" stroke="currentColor" stroke-width="2"/><path d="M8 12h8M8 8h5M8 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                          <span class="sw-upload__file-name">design-tokens.pdf</span>
+                          <span class="sw-upload__file-status sw-upload__file-status--error">✗ 上传失败</span>
+                          <button class="sw-upload__file-remove" aria-label="移除"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Data Table ===== -->
+            <div id="sec-data" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Table / Pagination</h2><p class="sw-desc">表格（行选择 / 展开行 / 排序）、分页。</p></div>
+                <span class="sw-tag">.sw-table .sw-pagination</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-row sw-row--between" style="margin-bottom:12px">
+                  <div class="sw-row sw-gap-sm">
+                    <input class="sw-input" placeholder="搜索用户..." style="width:200px" />
+                    <button class="sw-btn sw-btn--primary">查询</button>
+                  </div>
+                  <div class="sw-row sw-gap-sm">
+                    <button class="sw-btn">导出</button>
+                    <button class="sw-btn sw-btn--primary">新增用户</button>
+                  </div>
+                </div>
+                <div class="sw-table-wrap">
+                  <table class="sw-table" aria-label="用户表格">
+                    <thead>
+                      <tr>
+                        <th style="width:40px"><input type="checkbox" aria-label="全选" /></th>
+                        <th style="width:220px">用户</th>
+                        <th>角色</th>
+                        <th>状态</th>
+                        <th>更新时间 <span class="sw-table__sort-btn sw-table__sort-btn--asc"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 4l-8 8h16L12 4Z" fill="currentColor" class="sw-sort-up"/></svg><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 20l8-8H4l8 8Z" fill="currentColor" class="sw-sort-down"/></svg></span></th>
+                        <th style="width:160px">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="checkbox" checked aria-label="选择" /></td>
+                        <td><div class="sw-row sw-gap-sm"><div class="sw-avatar" style="width:28px;height:28px"></div><div style="display:flex;flex-direction:column;gap:2px"><div style="font-weight:650">李雷</div><div class="sw-muted" style="font-size:12px">lilei@example.com</div></div></div></td>
+                        <td><span class="sw-tag sw-tag--blue">Admin</span></td>
+                        <td><span class="sw-dot-status sw-dot-status--success">Enabled</span></td>
+                        <td class="sw-muted">2026-05-13 10:24</td>
+                        <td><div class="sw-row-actions"><a href="javascript:void(0)">编辑</a><a href="javascript:void(0)" style="color:var(--sw-error)">删除</a></div></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" aria-label="选择" /></td>
+                        <td><div class="sw-row sw-gap-sm"><div class="sw-avatar" style="width:28px;height:28px;background:linear-gradient(135deg,#13c2c2,#69b1ff)"></div><div style="display:flex;flex-direction:column;gap:2px"><div style="font-weight:650">韩梅梅</div><div class="sw-muted" style="font-size:12px">hanmm@example.com</div></div></div></td>
+                        <td><span class="sw-tag">Operator</span></td>
+                        <td><span class="sw-dot-status sw-dot-status--warning">Pending</span></td>
+                        <td class="sw-muted">2026-05-13 09:01</td>
+                        <td><div class="sw-row-actions"><a href="javascript:void(0)">查看</a><a href="javascript:void(0)">重置</a></div></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" aria-label="选择" /></td>
+                        <td><div class="sw-row sw-gap-sm"><div class="sw-avatar" style="width:28px;height:28px;background:linear-gradient(135deg,#ff7875,#ffd666)"></div><div style="display:flex;flex-direction:column;gap:2px"><div style="font-weight:650">张三</div><div class="sw-muted" style="font-size:12px">zhangsan@example.com</div></div></div></td>
+                        <td><span class="sw-tag">Viewer</span></td>
+                        <td><span class="sw-dot-status sw-dot-status--error">Disabled</span></td>
+                        <td class="sw-muted">2026-05-12 22:18</td>
+                        <td><div class="sw-row-actions"><a href="javascript:void(0)">启用</a><a href="javascript:void(0)">详情</a></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-pagination" aria-label="分页">
+                  <span class="sw-muted" style="margin-right:auto;font-size:12px">共 3 条</span>
+                  <button class="sw-pagebtn" aria-label="上一页">‹</button>
+                  <button class="sw-pagebtn" aria-current="true">1</button>
+                  <button class="sw-pagebtn">2</button>
+                  <button class="sw-pagebtn">3</button>
+                  <button class="sw-pagebtn" aria-label="下一页">›</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Data Display ===== -->
+            <div id="sec-display" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Timeline / Tree / Collapse / List</h2><p class="sw-desc">时间轴、树形控件、折叠面板、列表、描述列表、空状态、骨架屏。</p></div>
+                <span class="sw-tag sw-tag--blue">7 components</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Timeline 时间轴</div>
+                    <div class="sw-timeline">
+                      <div class="sw-timeline__item"><div class="sw-timeline__dot-wrap"><div class="sw-timeline__dot sw-timeline__dot--success"></div><div class="sw-timeline__line"></div></div><div class="sw-timeline__content"><div class="sw-timeline__title">发布 v2.3.0</div><div class="sw-timeline__desc">新增 Dashboard 统计卡片、Banner 横幅组件</div><div class="sw-timeline__time">2026-05-13 14:30</div></div></div>
+                      <div class="sw-timeline__item"><div class="sw-timeline__dot-wrap"><div class="sw-timeline__dot sw-timeline__dot--active"></div><div class="sw-timeline__line"></div></div><div class="sw-timeline__content"><div class="sw-timeline__title">代码评审中</div><div class="sw-timeline__desc">feat: 新增 Timeline / Tree / Collapse 等组件</div><div class="sw-timeline__time">2026-05-13 10:00</div></div></div>
+                      <div class="sw-timeline__item"><div class="sw-timeline__dot-wrap"><div class="sw-timeline__dot"></div><div class="sw-timeline__line"></div></div><div class="sw-timeline__content"><div class="sw-timeline__title">需求评审通过</div><div class="sw-timeline__desc">确定组件库补齐方案，对齐 Pro 视觉风格</div><div class="sw-timeline__time">2026-05-12 16:00</div></div></div>
+                      <div class="sw-timeline__item"><div class="sw-timeline__dot-wrap"><div class="sw-timeline__dot sw-timeline__dot--error"></div></div><div class="sw-timeline__content"><div class="sw-timeline__title">CI 构建失败</div><div class="sw-timeline__desc">修复后重新触发，已恢复正常</div><div class="sw-timeline__time">2026-05-12 09:00</div></div></div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Collapse 折叠面板</div>
+                    <div class="sw-collapse">
+                      <div class="sw-collapse__panel" data-open="true"><div class="sw-collapse__header"><span>通用配置</span><svg class="sw-collapse__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="sw-collapse__body">通过 CSS 变量统一管理颜色、间距、阴影与动效，支持亮色/暗色主题一键切换。</div></div>
+                      <div class="sw-collapse__panel" data-open="false"><div class="sw-collapse__header"><span>高级设置</span><svg class="sw-collapse__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="sw-collapse__body">支持自定义断点、响应式栅格与组件级 Token 覆写，适配多品牌/多产品线。</div></div>
+                      <div class="sw-collapse__panel" data-open="false"><div class="sw-collapse__header"><span>关于</span><svg class="sw-collapse__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="sw-collapse__body">sw-ui 组件库，遵循 Ant Design Pro 的视觉语义，纯 HTML/CSS/JS 实现，框架无关。</div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Tree 树形控件</div>
+                    <div class="sw-tree">
+                      <div class="sw-tree__node" aria-expanded="true"><span class="sw-tree__toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sw-tree__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 4h7v6H3V4Z" stroke="currentColor" stroke-width="2"/><path d="M14 4h7v6h-7V4Z" stroke="currentColor" stroke-width="2"/><path d="M3 14h7v6H3v-6Z" stroke="currentColor" stroke-width="2"/><path d="M14 14h7v6h-7v-6Z" stroke="currentColor" stroke-width="2"/></svg></span>组件库</div>
+                      <div class="sw-tree__children">
+                        <div class="sw-tree__node sw-tree__node--active" aria-expanded="false"><span class="sw-tree__toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sw-tree__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4V4Z" stroke="currentColor" stroke-width="2"/><path d="M14 4h6v16h-6V4Z" stroke="currentColor" stroke-width="2"/><path d="M4 14h6v6H4v-6Z" stroke="currentColor" stroke-width="2"/></svg></span>数据展示</div>
+                        <div class="sw-tree__node sw-tree__node--leaf">Timeline</div>
+                        <div class="sw-tree__node sw-tree__node--leaf">Tree</div>
+                        <div class="sw-tree__node sw-tree__node--leaf">Collapse</div>
+                      </div>
+                      <div class="sw-tree__node" aria-expanded="false"><span class="sw-tree__toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sw-tree__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 4v16m-8-8h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>数据录入</div>
+                      <div class="sw-tree__children">
+                        <div class="sw-tree__node sw-tree__node--leaf">Form</div>
+                        <div class="sw-tree__node sw-tree__node--leaf">Upload</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">List 列表 / Empty 空状态</div>
+                    <div class="sw-list">
+                      <div class="sw-list__item"><div class="sw-list__item-left"><div class="sw-avatar" style="width:36px;height:36px"></div><div class="sw-list__item-content"><div class="sw-list__item-title">项目 Alpha</div><div class="sw-list__item-desc">中后台管理系统前端框架</div></div></div><div class="sw-list__item-meta"><span class="sw-tag sw-tag--green">Active</span><span class="sw-muted">2h ago</span></div></div>
+                      <div class="sw-list__item"><div class="sw-list__item-left"><div class="sw-avatar" style="width:36px;height:36px;background:linear-gradient(135deg,#13c2c2,#69b1ff)"></div><div class="sw-list__item-content"><div class="sw-list__item-title">数据中台</div><div class="sw-list__item-desc">统一数据服务与治理平台</div></div></div><div class="sw-list__item-meta"><span class="sw-tag sw-tag--gold">Pending</span><span class="sw-muted">5h ago</span></div></div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-empty">
+                      <div class="sw-empty__img"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="4" stroke="currentColor" stroke-width="2"/><path d="M20 28h24M20 36h16M20 44h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+                      <div class="sw-empty__text">暂无数据</div>
+                      <button class="sw-btn sw-btn--primary sw-btn--sm">立即创建</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Descriptions 描述列表</div>
+                <div class="sw-descriptions">
+                  <div class="sw-descriptions__item"><div class="sw-descriptions__label">应用名称</div><div class="sw-descriptions__value">payment-v2</div></div>
+                  <div class="sw-descriptions__item"><div class="sw-descriptions__label">创建人</div><div class="sw-descriptions__value">admin</div></div>
+                  <div class="sw-descriptions__item"><div class="sw-descriptions__label">版本</div><div class="sw-descriptions__value">2.3.0</div></div>
+                  <div class="sw-descriptions__item"><div class="sw-descriptions__label">部署环境</div><div class="sw-descriptions__value"><span class="sw-dot-status sw-dot-status--success">生产环境</span></div></div>
+                  <div class="sw-descriptions__item"><div class="sw-descriptions__label">创建时间</div><div class="sw-descriptions__value">2026-05-01</div></div>
+                  <div class="sw-descriptions__item"><div class="sw-descriptions__label">描述</div><div class="sw-descriptions__value">支付网关 v2 重构</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Statistic / Progress ===== -->
+            <div id="sec-statistic" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Statistic / Progress</h2><p class="sw-desc">统计数值、StatCard 统计卡片、线形进度条、圆形进度条、骨架屏。</p></div>
+                <span class="sw-tag sw-tag--blue">5 components</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-row sw-gap-sm" style="margin-bottom:16px">
+                  <div class="sw-statcard" style="flex:1">
+                    <div class="sw-statcard__header"><span class="sw-statcard__title">总销售额</span><div class="sw-statcard__icon" style="background:color-mix(in oklab,var(--sw-primary) 12%,transparent);color:var(--sw-primary)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+                    <div><div class="sw-statcard__value">¥126,560</div></div>
+                    <div class="sw-statcard__footer"><span class="sw-statistic__trend sw-statistic__trend--up">▲ 15.2%</span><span>较上周</span></div>
+                  </div>
+                  <div class="sw-statcard" style="flex:1">
+                    <div class="sw-statcard__header"><span class="sw-statcard__title">访问量</span><div class="sw-statcard__icon" style="background:color-mix(in oklab,var(--sw-success) 12%,transparent);color:var(--sw-success)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 15l4-4 5 5 4-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+                    <div><div class="sw-statcard__value">8,846</div></div>
+                    <div class="sw-statcard__footer"><span class="sw-statistic__trend sw-statistic__trend--down">▼ 3.8%</span><span>较昨日</span></div>
+                  </div>
+                  <div class="sw-statcard" style="flex:1">
+                    <div class="sw-statcard__header"><span class="sw-statcard__title">转化率</span><div class="sw-statcard__icon" style="background:color-mix(in oklab,var(--sw-warning) 12%,transparent);color:var(--sw-warning)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+                    <div><div class="sw-statcard__value">3.62%</div></div>
+                    <div class="sw-statcard__footer"><span>今日正常波动</span></div>
+                  </div>
+                </div>
+                <div class="sw-divider"></div>
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Progress 线形进度条</div>
+                    <div style="display:flex;flex-direction:column;gap:12px">
+                      <div><div class="sw-muted" style="font-size:12px;margin-bottom:4px">默认 68%</div><div class="sw-progress"><div class="sw-progress__bar" style="--v:68%"></div></div></div>
+                      <div><div class="sw-muted" style="font-size:12px;margin-bottom:4px">成功 100%</div><div class="sw-progress"><div class="sw-progress__bar" style="--v:100%;background:linear-gradient(90deg,var(--sw-success),#95de64)"></div></div></div>
+                      <div><div class="sw-muted" style="font-size:12px;margin-bottom:4px">警告 45%</div><div class="sw-progress"><div class="sw-progress__bar" style="--v:45%;background:linear-gradient(90deg,var(--sw-warning),#ffd666)"></div></div></div>
+                      <div><div class="sw-muted" style="font-size:12px;margin-bottom:4px">错误 20%</div><div class="sw-progress"><div class="sw-progress__bar" style="--v:20%;background:linear-gradient(90deg,var(--sw-error),#ff7875)"></div></div></div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Progress 圆形进度条</div>
+                    <div class="sw-row sw-gap-sm" style="flex-wrap:wrap">
+                      <!-- 75% 主色 -->
+                      <div class="sw-progress-circle">
+                        <div class="sw-progress-circle__inner">
+                          <svg class="sw-progress-circle__svg" width="80" height="80" viewBox="0 0 80 80">
+                            <circle class="sw-progress-circle__bg" cx="40" cy="40" r="34"/>
+                            <circle class="sw-progress-circle__bar" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="53.4"/>
+                          </svg>
+                          <span class="sw-progress-circle__text">75%</span>
+                        </div>
+                        <span class="sw-progress-circle__label">默认</span>
+                      </div>
+                      <!-- 100% 成功 -->
+                      <div class="sw-progress-circle">
+                        <div class="sw-progress-circle__inner">
+                          <svg class="sw-progress-circle__svg" width="80" height="80" viewBox="0 0 80 80">
+                            <circle class="sw-progress-circle__bg" cx="40" cy="40" r="34"/>
+                            <circle class="sw-progress-circle__bar sw-progress-circle__bar--success" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="0"/>
+                          </svg>
+                          <span class="sw-progress-circle__text" style="color:var(--sw-success)">✓</span>
+                        </div>
+                        <span class="sw-progress-circle__label">完成</span>
+                      </div>
+                      <!-- 30% 警告 -->
+                      <div class="sw-progress-circle">
+                        <div class="sw-progress-circle__inner">
+                          <svg class="sw-progress-circle__svg" width="80" height="80" viewBox="0 0 80 80">
+                            <circle class="sw-progress-circle__bg" cx="40" cy="40" r="34"/>
+                            <circle class="sw-progress-circle__bar sw-progress-circle__bar--warning" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="149.5"/>
+                          </svg>
+                          <span class="sw-progress-circle__text">30%</span>
+                        </div>
+                        <span class="sw-progress-circle__label">警告</span>
+                      </div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Skeleton 骨架屏</div>
+                    <div class="sw-skeleton">
+                      <div class="sw-skeleton__row"><div class="sw-skeleton__line sw-skeleton__line--round"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="sw-skeleton__line sw-skeleton__line--sm"></div><div class="sw-skeleton__line sw-skeleton__line--md"></div></div></div>
+                      <div class="sw-skeleton__line sw-skeleton__line--lg"></div>
+                      <div class="sw-skeleton__line sw-skeleton__line--md"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Image ===== -->
+            <div id="sec-image" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Image 图片</h2><p class="sw-desc">图片预览（悬停遮罩）、图片组、占位图、水印。</p></div>
+                <span class="sw-tag">.sw-image-preview .sw-image-group</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">图片预览（悬停查看）</div>
+                    <div class="sw-image-group">
+                      <div class="sw-image-preview" style="width:100px;height:100px">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1677ff,#69b1ff);border-radius:12px"></div>
+                        <div class="sw-image-preview__mask"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>预览</div>
+                      </div>
+                      <div class="sw-image-preview" style="width:100px;height:100px">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#722ed1,#b37feb);border-radius:12px"></div>
+                        <div class="sw-image-preview__mask"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>预览</div>
+                      </div>
+                      <div class="sw-image-preview" style="width:100px;height:100px">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,#13c2c2,#36cfc9);border-radius:12px"></div>
+                        <div class="sw-image-preview__mask"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>预览</div>
+                      </div>
+                      <div class="sw-placeholder-img" style="width:100px;height:100px">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span>占位图</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Watermark 水印</div>
+                    <div class="sw-watermark sw-card" data-text="sw-ui DEMO" style="border-radius:16px;min-height:120px">
+                      <div class="sw-card__bd">
+                        <div class="sw-kpi"><div class="sw-kpi__label">水印示例</div><div class="sw-kpi__value" style="font-size:16px">内容区域</div></div>
+                        <div class="sw-muted" style="font-size:12px;margin-top:8px">通过 CSS ::after 伪元素实现，不影响内容交互。</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Feedback ===== -->
+            <div id="sec-feedback" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Alert / Toast / Modal / Drawer</h2><p class="sw-desc">四种 Alert 变体、Toast 通知、Modal 弹窗、Drawer 抽屉（交互可用）。</p></div>
+                <span class="sw-tag">.sw-alert .sw-overlay .sw-drawer .sw-toasts</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-row" style="margin-bottom:12px">
+                      <button class="sw-btn" id="swDemoNotify2">触发 Toast</button>
+                      <button class="sw-btn sw-btn--danger" id="swDemoError2">触发 Error</button>
+                      <button class="sw-btn sw-btn--primary" id="swOpenModal2">打开 Modal</button>
+                    </div>
+                    <div class="sw-alert sw-alert--info" style="margin-bottom:8px">
+                      <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-primary)" stroke-width="2"/><path d="M12 7v6" stroke="var(--sw-primary)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-primary)" stroke-width="3" stroke-linecap="round"/></svg></div>
+                      <div><p class="sw-alert__title">信息提示</p><p class="sw-alert__desc">用于说明变化、规范、或引导下一步。</p></div>
+                    </div>
+                    <div class="sw-alert sw-alert--success" style="margin-bottom:8px">
+                      <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-success)" stroke-width="2"/><path d="M7 12.5l3 3 7-7" stroke="var(--sw-success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                      <div><p class="sw-alert__title">成功</p><p class="sw-alert__desc">操作完成，建议给出下一步动作。</p></div>
+                    </div>
+                    <div class="sw-alert sw-alert--warning" style="margin-bottom:8px">
+                      <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 9v4" stroke="var(--sw-warning)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-warning)" stroke-width="3" stroke-linecap="round"/><path d="M10.3 4.6a2 2 0 0 1 3.4 0l8 14a2 2 0 0 1-1.7 3H4a2 2 0 0 1-1.7-3l8-14Z" stroke="var(--sw-warning)" stroke-width="2" stroke-linejoin="round"/></svg></div>
+                      <div><p class="sw-alert__title">警告</p><p class="sw-alert__desc">需要用户注意的重要信息。</p></div>
+                    </div>
+                    <div class="sw-alert sw-alert--error">
+                      <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-error)" stroke-width="2"/><path d="M12 8v5" stroke="var(--sw-error)" stroke-width="2" stroke-linecap="round"/><path d="M12 16h.01" stroke="var(--sw-error)" stroke-width="3" stroke-linecap="round"/></svg></div>
+                      <div><p class="sw-alert__title">错误</p><p class="sw-alert__desc">失败原因要可定位，可重试或给出兜底方案。</p></div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-card" style="border-radius:16px">
+                      <div class="sw-card__hd"><div><div class="sw-h2">表单提交（示例）</div><div class="sw-desc">右侧抽屉/弹窗可展示详情、确认、编辑等。</div></div><span class="sw-tag">pattern</span></div>
+                      <div class="sw-card__bd">
+                        <div class="sw-field"><div class="sw-label">任务名称</div><input class="sw-input" placeholder="例如：新增权限组" /></div>
+                        <div class="sw-divider"></div>
+                        <div class="sw-row sw-row--between"><div><div class="sw-label">发布后自动通知</div><div class="sw-help">建议默认开启（示例）。</div></div><div class="sw-switch" role="switch" aria-checked="false" aria-disabled="false"></div></div>
+                      </div>
+                      <div class="sw-card__ft">
+                        <button class="sw-btn" id="swOpenDrawer2">查看详情</button>
+                        <button class="sw-btn sw-btn--primary" id="swOpenModal3">确认发布</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Result / Spin / Notice ===== -->
+            <div id="sec-utility" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Result / Spin / Notice</h2><p class="sw-desc">结果页、加载状态（多尺寸/overlay）、通知栏（四种变体）。</p></div>
+                <span class="sw-tag sw-tag--blue">3 components</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Result 结果页</div>
+                    <div class="sw-card" style="border-radius:16px;overflow:hidden">
+                      <div class="sw-result">
+                        <div class="sw-result__icon"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="var(--sw-success)" stroke-width="3"/><path d="M20 33l8 8 16-16" stroke="var(--sw-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <h3 class="sw-result__title">操作成功</h3>
+                        <p class="sw-result__desc">已成功提交申请，预计 1-3 个工作日内完成审核，请耐心等待。</p>
+                        <div class="sw-result__extra"><button class="sw-btn sw-btn--primary">返回首页</button><button class="sw-btn">查看进度</button></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Spin 加载</div>
+                    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-bottom:16px">
+                      <div class="sw-spin sw-spin--sm"><div class="sw-spin__indicator"></div></div>
+                      <div class="sw-spin"><div class="sw-spin__indicator"></div></div>
+                      <div class="sw-spin sw-spin--lg"><div class="sw-spin__indicator"></div></div>
+                      <div class="sw-spin"><div class="sw-spin__indicator"></div><span class="sw-spin__text">加载中...</span></div>
+                    </div>
+                    <div class="sw-card" style="border-radius:16px;padding:20px;position:relative;min-height:80px">
+                      <div style="display:flex;gap:12px;align-items:center"><div class="sw-avatar" style="width:40px;height:40px"></div><div><div style="font-weight:650">李雷</div><div class="sw-muted" style="font-size:12px">lilei@example.com</div></div></div>
+                      <div class="sw-spin__overlay"><div class="sw-spin" style="flex-direction:column;gap:8px"><div class="sw-spin__indicator"></div><span class="sw-spin__text">数据加载中...</span></div></div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Notice 通知栏</div>
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <div class="sw-notice sw-notice--info"><div class="sw-notice__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-primary)" stroke-width="2"/><path d="M12 7v6" stroke="var(--sw-primary)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-primary)" stroke-width="3" stroke-linecap="round"/></svg></div><span class="sw-notice__text">系统将于 5月15日 02:00-04:00 进行维护升级。</span><span class="sw-notice__action">查看详情</span></div>
+                      <div class="sw-notice sw-notice--warning"><div class="sw-notice__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 9v4" stroke="var(--sw-warning)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-warning)" stroke-width="3" stroke-linecap="round"/><path d="M10.3 4.6a2 2 0 0 1 3.4 0l8 14a2 2 0 0 1-1.7 3H4a2 2 0 0 1-1.7-3l8-14Z" stroke="var(--sw-warning)" stroke-width="2" stroke-linejoin="round"/></svg></div><span class="sw-notice__text">本月 API 配额已使用 85%，请注意控制调用频率。</span></div>
+                      <div class="sw-notice sw-notice--success"><div class="sw-notice__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-success)" stroke-width="2"/><path d="M7 12.5l3 3 7-7" stroke="var(--sw-success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sw-notice__text">v2.3.0 已成功部署到生产环境，所有节点健康检查通过。</span></div>
+                      <div class="sw-notice sw-notice--error"><div class="sw-notice__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-error)" stroke-width="2"/><path d="M12 8v5" stroke="var(--sw-error)" stroke-width="2" stroke-linecap="round"/><path d="M12 16h.01" stroke="var(--sw-error)" stroke-width="3" stroke-linecap="round"/></svg></div><span class="sw-notice__text">数据库连接池耗尽，已自动触发扩容，当前恢复中。</span><button class="sw-notice__close" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Popover / Tooltip ===== -->
+            <div id="sec-popover" class="sw-card">
+              <div class="sw-card__hd">
+                <div><h2 class="sw-h2">Popover / Tooltip / FloatButton</h2><p class="sw-desc">气泡卡片、文字提示、悬浮按钮。</p></div>
+                <span class="sw-tag">.sw-popover .sw-tooltip .sw-float-btn</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Popover 气泡卡片</div>
+                    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+                      <div class="sw-popover" data-open="false">
+                        <button class="sw-btn sw-popover__trigger">点击触发</button>
+                        <div class="sw-popover__content">
+                          <div class="sw-popover__title">气泡卡片</div>
+                          <p style="margin:0;font-size:12px;color:var(--sw-text-tertiary)">用于展示额外信息或简单操作，点击外部区域关闭。</p>
+                          <div style="margin-top:10px;display:flex;gap:8px"><button class="sw-btn sw-btn--primary sw-btn--sm">确认</button><button class="sw-btn sw-btn--sm">取消</button></div>
+                        </div>
+                      </div>
+                      <div class="sw-popover" data-open="false">
+                        <span class="sw-tag sw-tag--blue sw-popover__trigger" style="cursor:pointer">更多操作</span>
+                        <div class="sw-popover__content" style="min-width:120px">
+                          <div style="display:flex;flex-direction:column;gap:4px">
+                            <div style="padding:6px 8px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--sw-text-secondary)" onmouseover="this.style.background='var(--sw-fill-hover)'" onmouseout="this.style.background=''">编辑</div>
+                            <div style="padding:6px 8px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--sw-text-secondary)" onmouseover="this.style.background='var(--sw-fill-hover)'" onmouseout="this.style.background=''">复制</div>
+                            <div style="padding:6px 8px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--sw-error)" onmouseover="this.style.background='var(--sw-fill-hover)'" onmouseout="this.style.background=''">删除</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Tooltip 文字提示</div>
+                    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+                      <span class="sw-tooltip"><button class="sw-btn">Hover 我</button><span class="sw-tooltip__tip">这是一个文字提示</span></span>
+                      <span class="sw-tooltip"><span class="sw-tag sw-tag--blue">标签提示</span><span class="sw-tooltip__tip">Ant Design Pro 风格标签</span></span>
+                      <span class="sw-tooltip"><div class="sw-avatar" style="width:32px;height:32px;cursor:pointer"></div><span class="sw-tooltip__tip">李雷 / Admin</span></span>
+                    </div>
+                  </div>
+                  <div class="sw-col-6">
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">FloatButton 悬浮按钮</div>
+                    <div class="sw-alert sw-alert--info">
+                      <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-primary)" stroke-width="2"/><path d="M12 7v6" stroke="var(--sw-primary)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-primary)" stroke-width="3" stroke-linecap="round"/></svg></div>
+                      <div><p class="sw-alert__title">悬浮按钮</p><p class="sw-alert__desc">FloatButton 固定在页面右下角，右下角可见「回到顶部」按钮即为示例。</p></div>
+                    </div>
+                    <div class="sw-divider"></div>
+                    <div class="sw-h2" style="margin-bottom:12px;font-size:13px;color:var(--sw-text-tertiary)">Banner 横幅</div>
+                    <div class="sw-banner">
+                      <div class="sw-banner__content">
+                        <div class="sw-banner__title">🚀 sw-ui 组件库已就绪</div>
+                        <div class="sw-banner__desc">60+ 通用组件，对齐 Ant Design Pro 视觉风格，支持亮色/暗色主题，零框架依赖。</div>
+                        <div class="sw-banner__actions">
+                          <button class="sw-banner__btn sw-banner__btn--solid">开始使用</button>
+                          <button class="sw-banner__btn">查看文档</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sw-card__ft">
+                <span class="sw-muted" style="font-size:12px">提示：将本页 HTML 中的组件区块复制到你的项目即可复用。</span>
+                <span style="margin-left:auto"></span>
+                <button class="sw-btn sw-btn--link" onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
+              </div>
+            </div>
+
+          </div><!-- /.sw-page -->
+        </section>
+      </main>
+    </div><!-- /.sw-shell -->
+
+    <!-- Toast host -->
+    <div class="sw-toasts" aria-live="polite" aria-label="通知"></div>
+
+    <!-- Modal -->
+    <div class="sw-overlay" id="swModalOverlay" data-open="false" role="dialog" aria-modal="true" aria-label="示例弹窗">
+      <div class="sw-modal">
+        <div class="sw-modal__hd">
+          <div class="sw-modal__title">确认操作</div>
+          <button class="sw-iconbtn" id="swCloseModal" aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="sw-modal__bd">
+          <p class="sw-desc" style="margin:0 0 12px 0">该弹窗为通用化实现：适合确认、编辑、预览等场景；样式/间距对齐 Pro 的常见密度。</p>
+          <div class="sw-field"><div class="sw-label">备注（可选）</div><input class="sw-input" placeholder="输入备注..." /></div>
+        </div>
+        <div class="sw-modal__ft">
+          <button class="sw-btn sw-btn--ghost" id="swCancelModal">取消</button>
+          <button class="sw-btn sw-btn--primary" id="swOkModal">确认</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer -->
+    <aside class="sw-drawer" id="swDrawer" data-open="false" aria-label="示例抽屉">
+      <div class="sw-drawer__hd">
+        <div class="sw-drawer__title">详情抽屉</div>
+        <button class="sw-iconbtn" id="swCloseDrawer" aria-label="关闭抽屉"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="sw-drawer__bd">
+        <div class="sw-alert sw-alert--info">
+          <div class="sw-alert__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="var(--sw-primary)" stroke-width="2"/><path d="M12 7v6" stroke="var(--sw-primary)" stroke-width="2" stroke-linecap="round"/><path d="M12 17h.01" stroke="var(--sw-primary)" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div><p class="sw-alert__title">抽屉适用场景</p><p class="sw-alert__desc">侧边详细信息、编辑表单、帮助说明、审计记录等。</p></div>
+        </div>
+        <div class="sw-divider"></div>
+        <div class="sw-field"><div class="sw-label">快速操作</div><div class="sw-row"><button class="sw-btn sw-btn--primary" onclick="document.getElementById('swDrawer').setAttribute('data-open','false')">完成</button><button class="sw-btn sw-btn--ghost" onclick="document.getElementById('swDrawer').setAttribute('data-open','false')">关闭</button></div></div>
+        <div class="sw-divider"></div>
+        <pre class="sw-code"><code>/* 如何复用（示例）
+&lt;aside class="sw-drawer" data-open="true"&gt;...&lt;/aside&gt;
+// JS：切换 data-open 即可
+drawer.setAttribute('data-open','true')</code></pre>
+      </div>
+    </aside>
+
+    <!-- FloatButton 悬浮按钮组 -->
+    <div class="sw-float-btn--group">
+      <button class="sw-float-btn sw-float-btn--sm" title="回到顶部" aria-label="回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <script src="./scripts/app.js"></script>
+  </body>
+</html>

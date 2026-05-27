@@ -1,103 +1,129 @@
 ---
 name: ui-design
-description: Unified design system and frontend development standards for enterprise business systems. Use when creating UI interfaces, designing admin dashboards, building frontend pages, developing components, or following frontend coding standards.
+description: sw-ui component library for enterprise admin dashboards. Pure HTML+CSS+JS, Ant Design Pro style, zero dependencies. Use when building admin pages, management systems, dashboards, forms, tables, or any enterprise UI. Provides exact class names and copy-paste HTML snippets for buttons, cards, forms, tables, modals, drawers, alerts, navigation, and more.
 metadata:
   author: UI Design Team
   version: "1.0.0"
 ---
 
-# 原型设计与前端开发规范（SKILL）
+# sw-ui 企业级组件库
 
-## 技能概述
-本规范提供**框架无关、可直接复用的企业级公共UI组件库**，以及标准化前端开发最佳实践。
-默认设计风格对齐 **Ant Design Pro** 中后台系统标准，支持亮色/暗色主题适配。
+框架无关 · 零依赖 · Ant Design Pro 风格 · 支持亮色/暗色主题
 
-**核心导向**：优先复用公共组件库的成熟组件与代码 → 保持全系统UI/UX统一 → 减少重复开发，提升交付效率与界面一致性。
+## 使用前必读
 
-## 重要确认项（必须优先询问）
-在开始设计/开发前，请**先向用户确认**：
-> 请问你需要设计/开发的是 **PC端（中后台/网页）** 还是 **移动端（H5/小程序/App）** 界面？
+**第一步：确认平台**
+- PC 端（中后台/管理系统）→ 使用本规范
+- 移动端（H5/小程序）→ 不适用本规范，改用移动端方案
 
-- 若为 **PC端**：遵循本规范，使用 `src/components/` 公共组件库（Ant Design Pro风格）
-- 若为 **移动端**：自动适配移动端设计规范与组件风格
+**第二步：读取参考文件**
 
-## 使用场景
-- 企业中后台系统、业务平台界面设计与开发
-- 需要统一视觉风格、交互体验的前端项目
-- 快速搭建高一致性界面原型
-- 遵循前端工程化规范的模块化开发
+| 需求 | 读取文件 |
+|------|---------|
+| 查找组件 HTML 结构和 class 名 | `references/component-classes.md` |
+| 查找 CSS 变量（颜色/间距/阴影） | `references/design-tokens.md` |
 
-## 标准工程化目录（符合主流前端规范）
-```
-# 标准前端工程化目录（组件化、模块化、可复用）
-├── public/              # 静态资源
-├── src/                 # 项目主源码
-│   ├── assets/          # 图片、字体等资源
-│   ├── styles/          # 全局公共样式（主题、变量、重置）
-│   ├── components/      # 【核心：公共可复用UI组件库】按钮、卡片、表单、弹窗、表格等
-│   │   ├── Button/      # 独立组件文件夹
-│   │   ├── Card/
-│   │   ├── Form/
-│   │   ├── Modal/
-│   │   └── ...          # 其他通用组件
-│   ├── views/           # 业务页面（复用公共组件构建）
-│   │   ├── Order/       # 订单模块页面
-│   │   ├── Product/     # 商品模块页面
-│   │   └── ...
-│   ├── utils/           # 工具函数、公共逻辑
-│   ├── App.vue / App.jsx # 应用入口
-│   └── main.js          # 项目入口文件
-```
-
-## 一、界面设计规范
-1. **优先复用现有组件**：所有页面优先使用 `src/components/` 公共组件库中已有的组件进行设计与搭建。
-2. **遵循统一设计语言**：严格遵循组件库定义的尺寸、间距、色彩、字体、圆角、阴影、交互规则。
-3. **扩展保持一致性**：如需新增组件，需对齐现有组件的设计风格与交互逻辑，保证整体统一。
-
-## 二、前端开发规范（组件复用导向）
-1. **优先复用公共组件**
-   开发业务页面时，优先从**公共组件库**中查找并使用匹配的组件（Button/Card/Form/Table/Modal等），基于现有组件进行组合使用。
-
-2. **组件使用原则**
-   - 可修改：组件展示内容、文案、数据源、业务状态、回调事件
-   - 推荐保持：组件基础结构、样式类名、核心交互逻辑、主题样式
-   - 扩展方式：业务个性化需求优先通过**属性传参、插槽、组合**实现，避免直接修改组件源码
-
-3. **样式规范**
-   - 优先使用公共组件库自带样式与全局样式
-   - 业务个性化样式独立维护，不污染、不覆盖公共组件基础样式
-   - 支持主题变量，统一适配亮色/暗色模式
-
-4. **交互与逻辑规范**
-   - 公共交互（表单验证、弹窗、加载、提示、按钮状态）优先复用组件内置能力
-   - 业务逻辑独立封装，不侵入公共组件底层实现
-   - 按钮、输入框等控件自动适配内容长度，保证展示正常、无文字溢出、无错位
-
-## 三、组件复用示例
-```html
-<!-- 业务页面中，复用公共组件库的组件 -->
-<div class="page-order">
-  <!-- 复用公共卡片组件 -->
-  <Card title="订单详情" shadow="light">
-    <!-- 复用公共表单组件 -->
-    <Form labelWidth="80px">
-      <FormItem label="订单号">
-        <span>20250415001</span>
-      </FormItem>
-      <!-- 复用公共按钮组件 -->
-      <Button type="primary" onClick={handleSubmit}>
-        确认提交
-      </Button>
-    </Form>
-  </Card>
-  </div>
-```
-
-## 四、补充最佳实践
-1. 保持组件**可复用、可组合、可维护**，结构清晰、命名规范。
-2. 页面由公共组件**组合搭建**，减少重复代码，提升开发效率。
-3. 界面一致性优先于个性化需求，确保用户体验统一。
-4. 遵循前端工程化与组件化开发思想，便于团队协作与长期维护。
+**第三步：直接复制代码**
+`references/component-classes.md` 中每个组件都有完整可用的 HTML 片段，直接复制，不要自己编写 class 名。
 
 ---
 
+## 页面初始化模板
+
+每个页面必须按此顺序引入，缺一不可：
+
+```html
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>页面标题</title>
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/base.css" />
+  <link rel="stylesheet" href="./styles/components.css" />
+</head>
+<body>
+  <!-- 页面内容 -->
+  <script src="./scripts/app.js"></script>
+</body>
+</html>
+```
+
+切换暗色主题：将 `<html data-theme="light">` 改为 `<html data-theme="dark">`
+
+---
+
+## 文件结构（每个业务系统完整复制）
+
+```
+业务系统/
+├── index.html
+├── styles/
+│   ├── tokens.css       ← 完整复制，禁止修改
+│   ├── base.css         ← 完整复制，禁止修改
+│   └── components.css   ← 完整复制，禁止修改
+└── scripts/
+    └── app.js           ← 完整复制，禁止修改
+```
+
+业务自定义样式写在单独的 `styles/custom.css` 中，不覆盖上述四个文件。
+
+---
+
+## 组件速查索引
+
+按需求关键词快速定位 → 在 `references/component-classes.md` 中找对应章节：
+
+| 需求关键词 | 组件章节 |
+|-----------|---------|
+| 整体页面框架、侧边栏、顶部栏 | `## 布局 Shell` |
+| 栅格、列、行排列 | `## 栅格 Grid` |
+| 卡片、面板、容器 | `## 卡片 Card` |
+| 按钮、操作、提交、新增、删除 | `## 按钮 Button` |
+| 输入框、文本域、搜索框 | `## 输入 Input` |
+| 下拉选择、Select | `## 下拉选择 Select` |
+| 复选框、单选框、开关 | `## 选择控件 Checkbox/Radio/Switch` |
+| 标签、状态标记、徽标、头像 | `## 标签 Tag / 徽标 Badge / 头像 Avatar` |
+| 侧边菜单、导航菜单 | `## 菜单 Menu` |
+| 面包屑、路径导航 | `## 面包屑 Breadcrumb` |
+| 标签页、Tab 切换 | `## 标签页 Tabs` |
+| 分段控制器、视图切换 | `## 分段控制器 Segmented` |
+| 表格、列表数据、行列 | `## 表格 Table` |
+| 分页 | `## 分页 Pagination` |
+| 进度条 | `## 进度条 Progress` |
+| 步骤条、流程 | `## 步骤条 Steps` |
+| 数据统计、KPI 卡片 | `## 数据统计 KPI / Statistic` |
+| 详情描述、字段展示 | `## 描述列表 Descriptions` |
+| 时间轴、操作记录 | `## 时间轴 Timeline` |
+| 列表、信息流 | `## 列表 List` |
+| 树形结构、层级 | `## 树形 Tree` |
+| 提示条、警告、成功/错误提示 | `## 提示 Alert` |
+| 弹窗、确认框、对话框 | `## 弹窗 Modal` |
+| 抽屉、侧滑面板 | `## 抽屉 Drawer` |
+| 消息通知、Toast | `## 消息通知 Toast` |
+| 折叠面板、手风琴 | `## 折叠面板 Collapse` |
+| 空状态、无数据 | `## 空状态 Empty` |
+| 骨架屏、加载占位 | `## 骨架屏 Skeleton` |
+| 横幅、宣传区块 | `## 横幅 Banner` |
+| 文件上传 | `## 上传 Upload` |
+| 分割线 | `## 分割线 Divider` |
+| 下拉菜单、用户菜单 | `## 下拉菜单 Dropdown` |
+| 标题、正文、文本样式 | `## 排版 Typography` |
+| CSS 颜色变量、间距变量 | `references/design-tokens.md` |
+
+---
+
+## 强制规则
+
+1. **class 名必须从 `references/component-classes.md` 中复制**，不得自行命名
+2. **四个核心文件（tokens/base/components/app.js）禁止修改**
+3. **交互组件**（Modal、Drawer、Select、Switch、Tabs、Toast 等）依赖 `app.js`，必须引入
+4. **需要 JS 交互的组件**必须保留对应的 `id` 或 `data-*` 属性，否则交互失效：
+   - Modal：`id="swModalOverlay"` / `id="swCloseModal"` / `id="swOkModal"`
+   - Drawer：`id="swDrawer"` / `id="swCloseDrawer"`
+   - Select：`data-open="false"` 属性
+   - Switch：`role="switch"` + `aria-checked` 属性
+   - Tabs：`data-tab` + `data-tabpanel` + `data-tabs-root` 属性
+   - Collapse：`data-open="false"` 属性
+   - Toast：页面需有 `<div class="sw-toasts"></div>` 容器
