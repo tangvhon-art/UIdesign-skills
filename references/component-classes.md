@@ -254,30 +254,285 @@
 - **水平菜单激活**：`aria-current="page"` → 底部 2px 蓝色下划线，背景保持透明
 - **切换激活项**：移除旧项的 `aria-current="page"`，在新项上添加 `aria-current="page"`
 
-<!-- 面包屑 -->
+### 水平菜单 + 悬浮下拉子菜单（树形）
+
+**交互依赖**：纯 CSS hover 驱动，需 `app.js` 处理叶子项激活态同步。
+父菜单项加 `sw-menu__item--has-sub`，内部放 `.sw-menu__dropdown` 即可，无需额外 JS 初始化。
+
+```html
+<nav class="sw-menu sw-menu--horizontal" aria-label="顶部导航">
+
+  <!-- 普通菜单项（无子菜单） -->
+  <div class="sw-menu__item" aria-current="page">首页</div>
+
+  <!-- 一级下拉（hover 展开） -->
+  <div class="sw-menu__item sw-menu__item--has-sub">
+    订单管理
+    <svg class="sw-menu__item-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none">
+      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="sw-menu__dropdown">
+      <div class="sw-menu__item">订单列表</div>
+      <div class="sw-menu__item">退款管理</div>
+      <div class="sw-menu__dropdown-sep"></div>
+      <div class="sw-menu__item">导出记录</div>
+    </div>
+  </div>
+
+  <!-- 二级嵌套下拉（树形，hover 向右展开） -->
+  <div class="sw-menu__item sw-menu__item--has-sub">
+    商品管理
+    <svg class="sw-menu__item-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none">
+      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="sw-menu__dropdown">
+      <div class="sw-menu__item">商品列表</div>
+      <!-- 二级子菜单：向右展开 -->
+      <div class="sw-menu__item sw-menu__item--has-sub">
+        商品分类
+        <svg class="sw-menu__item-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="sw-menu__dropdown">
+          <div class="sw-menu__item">服装</div>
+          <div class="sw-menu__item">电子产品</div>
+          <div class="sw-menu__item">食品</div>
+        </div>
+      </div>
+      <div class="sw-menu__item">库存管理</div>
+    </div>
+  </div>
+
+  <div class="sw-menu__item">数据报表</div>
+  <div class="sw-menu__item">系统设置</div>
+</nav>
+```
+
+**class 说明：**
+
+| class | 说明 |
+|-------|------|
+| `sw-menu__item--has-sub` | 标记该菜单项有子菜单，hover 时展开 `.sw-menu__dropdown` |
+| `sw-menu__dropdown` | 下拉面板，绝对定位，默认隐藏，父项 hover 时显示 |
+| `sw-menu__dropdown-sep` | 下拉面板内分隔线 |
+| `sw-menu__item-arrow`（水平菜单顶层） | 向下箭头 `↓`，hover 时旋转 180° |
+| `sw-menu__item-arrow`（下拉内二级） | 向右箭头 `→`，固定 `transform: rotate(-90deg)` |
+
+---
+
+## 面包屑 Breadcrumb
+
+```html
+<!-- 基础 -->
 <div class="sw-breadcrumb">
   <a href="#">首页</a>
   <span class="sw-breadcrumb__sep">/</span>
-  <span>当前页</span>
+  <a href="#">订单管理</a>
+  <span class="sw-breadcrumb__sep">/</span>
+  <span>订单详情</span>
 </div>
 
-<!-- 标签页 -->
+<!-- 大号（带图标） -->
+<div class="sw-breadcrumb sw-breadcrumb--lg">
+  <span class="sw-breadcrumb__item">
+    <svg width="16" height="16" ...></svg>
+    <a href="#">首页</a>
+  </span>
+  <span class="sw-breadcrumb__sep">/</span>
+  <span class="sw-breadcrumb__item sw-breadcrumb__item--current">当前页</span>
+</div>
+```
+
+## 标签页 Tabs
+
+**交互依赖**：需 `app.js`，`data-tab` 与 `data-tabpanel` 值必须一一对应。
+
+```html
 <div class="sw-tabs">
   <button class="sw-tab" aria-selected="true" data-tab="tab1">标签一</button>
   <button class="sw-tab" aria-selected="false" data-tab="tab2">标签二</button>
+  <button class="sw-tab" aria-selected="false" data-tab="tab3">标签三</button>
 </div>
 <div data-tabs-root>
   <div class="sw-tabpanel" data-tabpanel="tab1" data-active="true">内容一</div>
   <div class="sw-tabpanel" data-tabpanel="tab2" data-active="false">内容二</div>
+  <div class="sw-tabpanel" data-tabpanel="tab3" data-active="false">内容三</div>
 </div>
+```
 
-<!-- 分段控制器 -->
+## 分段控制器 Segmented
+
+**交互依赖**：需 `app.js`。
+
+```html
 <div class="sw-segmented">
   <button class="sw-segmented__item" aria-selected="true">列表</button>
   <button class="sw-segmented__item" aria-selected="false">卡片</button>
   <button class="sw-segmented__item" aria-selected="false">看板</button>
 </div>
 ```
+
+---
+
+## 日期时间选择器 DatePicker / TimePicker
+
+**交互依赖**：所有变体均需 `app.js`。
+**必须保留的 id**：JS 通过 id 初始化，id 不可省略或修改。
+
+### 变体一览
+
+| 变体 | 组件 | 初始化方式 |
+|------|------|-----------|
+| 仅日期选择 | `sw-datepicker` | `initSingleDP('id')` — 已内置，id=`dp1` |
+| 日期范围选择 | `sw-datepicker` + `--range` | `initRangeDP('id')` — 已内置，id=`drp1` |
+| 时分秒选择 | `sw-timepicker` | `initTP('id')` — 已内置，id=`tp1` |
+| 仅时分选择 | `sw-timepicker` + `data-tp-mode="hm"` | 自动初始化，无需额外调用 |
+| 时间范围选择 | `sw-timerange` | `initTimeRangePickers()` — 已内置，自动扫描 |
+
+### 仅日期选择（DatePicker）
+
+```html
+<div class="sw-datepicker" id="dp1" data-open="false">
+  <div class="sw-datepicker__input" role="button" aria-haspopup="true" aria-expanded="false">
+    <span class="sw-datepicker__input-text sw-datepicker__input-text--placeholder" id="dp1-text">请选择日期</span>
+    <span class="sw-datepicker__input-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </span>
+  </div>
+  <div class="sw-datepicker__panel" id="dp1-panel">
+    <div class="sw-cal" id="dp1-cal" data-mode="single"></div>
+    <div class="sw-datepicker__footer">
+      <button class="sw-datepicker__footer-link" data-dp-today="dp1">今天</button>
+      <button class="sw-btn sw-btn--primary sw-btn--sm" data-dp-ok="dp1">确定</button>
+    </div>
+  </div>
+</div>
+```
+
+### 日期范围选择（DateRangePicker）
+
+```html
+<div class="sw-datepicker" id="drp1" data-open="false">
+  <div class="sw-datepicker__input" role="button" aria-haspopup="true" aria-expanded="false">
+    <span class="sw-datepicker__input-text sw-datepicker__input-text--placeholder" id="drp1-start">开始日期</span>
+    <span class="sw-datepicker__input-sep">→</span>
+    <span class="sw-datepicker__input-text sw-datepicker__input-text--placeholder" id="drp1-end">结束日期</span>
+    <span class="sw-datepicker__input-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 9h18" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </span>
+  </div>
+  <div class="sw-datepicker__panel sw-datepicker__panel--range" id="drp1-panel">
+    <div class="sw-cal" id="drp1-cal-l" data-mode="range-left"></div>
+    <div class="sw-cal" id="drp1-cal-r" data-mode="range-right"></div>
+  </div>
+</div>
+```
+
+### 时分秒选择（TimePicker，默认）
+
+```html
+<div class="sw-timepicker" id="tp1" data-open="false">
+  <div class="sw-timepicker__input" role="button" aria-haspopup="true" aria-expanded="false">
+    <span class="sw-timepicker__input-text sw-timepicker__input-text--placeholder" id="tp1-text">请选择时间</span>
+    <span class="sw-timepicker__input-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+  <div class="sw-timepicker__panel" id="tp1-panel">
+    <div class="sw-timepicker__columns" id="tp1-cols"></div>
+    <div class="sw-timepicker__footer">
+      <button class="sw-timepicker__now" data-tp-now="tp1">此刻</button>
+      <button class="sw-timepicker__ok" data-tp-ok="tp1">确 定</button>
+    </div>
+  </div>
+</div>
+```
+
+### 仅时分选择（TimePicker HH:mm）
+
+在 `sw-timepicker` 上加 `data-tp-mode="hm"`，JS 自动识别，只渲染时/分两列，输出格式 `HH:mm`。
+
+```html
+<div class="sw-timepicker" id="tp2" data-open="false" data-tp-mode="hm">
+  <div class="sw-timepicker__input" role="button" aria-haspopup="true" aria-expanded="false">
+    <span class="sw-timepicker__input-text sw-timepicker__input-text--placeholder" id="tp2-text">请选择时间</span>
+    <span class="sw-timepicker__input-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+  <div class="sw-timepicker__panel" id="tp2-panel">
+    <div class="sw-timepicker__columns" id="tp2-cols"></div>
+    <div class="sw-timepicker__footer">
+      <button class="sw-timepicker__now" data-tp-now="tp2">此刻</button>
+      <button class="sw-timepicker__ok" data-tp-ok="tp2">确 定</button>
+    </div>
+  </div>
+</div>
+```
+
+### 时间范围选择（TimeRangePicker）
+
+`data-tr-mode="hm"` 时仅时分（输出 `HH:mm`），省略则时分秒（输出 `HH:mm:ss`）。
+
+```html
+<div class="sw-timerange" id="tr1" data-open="false" data-tr-mode="hm">
+  <div class="sw-timerange__input" role="button" aria-haspopup="true" aria-expanded="false">
+    <span class="sw-timerange__text sw-timerange__text--placeholder" id="tr1-start">开始时间</span>
+    <span class="sw-timerange__sep">→</span>
+    <span class="sw-timerange__text sw-timerange__text--placeholder" id="tr1-end">结束时间</span>
+    <span class="sw-timerange__icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+  <div class="sw-timerange__panel">
+    <div class="sw-timerange__pickers">
+      <div class="sw-timerange__side">
+        <div class="sw-timerange__side-label">开始时间</div>
+        <div class="sw-timepicker__columns"></div>
+      </div>
+      <div class="sw-timerange__side">
+        <div class="sw-timerange__side-label">结束时间</div>
+        <div class="sw-timepicker__columns"></div>
+      </div>
+    </div>
+    <div class="sw-timerange__footer">
+      <button class="sw-timerange__now" data-tr-now>此刻</button>
+      <button class="sw-timerange__ok" data-tr-ok>确 定</button>
+    </div>
+  </div>
+</div>
+```
+
+**关键 class / data 属性说明：**
+
+| 属性 | 说明 |
+|------|------|
+| `id="tr1"` | 必须有 id，JS 通过 id 查找 start/end 文本元素 |
+| `id="tr1-start"` / `id="tr1-end"` | 显示选中时间的文本节点，id = `{组件id}-start` / `{组件id}-end` |
+| `data-tr-mode="hm"` | 仅时分模式，省略则时分秒 |
+| `data-tr-now` | 此刻快捷按钮 |
+| `data-tr-ok` | 确定按钮 |
+| `.sw-timerange__side:first-child .sw-timepicker__columns` | 开始时间列容器，JS 自动填充 |
+| `.sw-timerange__side:last-child .sw-timepicker__columns` | 结束时间列容器，JS 自动填充 |
+
+
 
 ## 数据展示
 

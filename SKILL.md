@@ -87,8 +87,13 @@ metadata:
 | 标签、状态标记、徽标、头像 | `## 标签 Tag / 徽标 Badge / 头像 Avatar` |
 | 侧边菜单、导航菜单、垂直菜单 | `## 菜单 Menu` → 垂直菜单 |
 | 顶部导航栏、水平菜单 | `## 菜单 Menu` → 水平菜单（`sw-menu--horizontal`） |
+| 顶部导航下拉、悬浮子菜单、树形导航 | `## 菜单 Menu` → 水平菜单 + 悬浮下拉子菜单（`sw-menu__item--has-sub`） |
 | 子菜单、可展开菜单 | `## 菜单 Menu` → 可展开父菜单项（`aria-expanded`） |
-| 面包屑、路径导航 | `## 面包屑 Breadcrumb` |
+| 日期选择、日历 | `## 日期时间选择器` → 仅日期选择（DatePicker） |
+| 日期范围、起止日期 | `## 日期时间选择器` → 日期范围选择（DateRangePicker） |
+| 时间选择、时分秒 | `## 日期时间选择器` → 时分秒选择（TimePicker） |
+| 仅时分、HH:mm | `## 日期时间选择器` → 仅时分选择（`data-tp-mode="hm"`） |
+| 时间范围、开始结束时间 | `## 日期时间选择器` → 时间范围选择（TimeRangePicker） |
 | 标签页、Tab 切换 | `## 标签页 Tabs` |
 | 分段控制器、视图切换 | `## 分段控制器 Segmented` |
 | 表格、列表数据、行列 | `## 表格 Table` |
@@ -129,3 +134,9 @@ metadata:
    - Tabs：`data-tab` + `data-tabpanel` + `data-tabs-root` 属性
    - Collapse：`data-open="false"` 属性
    - Toast：页面需有 `<div class="sw-toasts"></div>` 容器
+   - DatePicker（单日期）：`id="dp1"`，内部 `id="dp1-text"` / `id="dp1-cal"` / `data-dp-today` / `data-dp-ok`
+   - DateRangePicker：`id="drp1"`，内部 `id="drp1-start"` / `id="drp1-end"` / `id="drp1-cal-l"` / `id="drp1-cal-r"`
+   - TimePicker（时分秒）：`id="tp1"`，内部 `id="tp1-text"` / `id="tp1-cols"` / `data-tp-now` / `data-tp-ok`
+   - TimePicker（仅时分）：在 `sw-timepicker` 上加 `data-tp-mode="hm"`，id 自定义（如 `id="tp2"`），内部 `id="{id}-text"` / `id="{id}-cols"`
+   - TimeRangePicker：`id` 自定义（如 `id="tr1"`），内部 `id="tr1-start"` / `id="tr1-end"`，`data-tr-mode="hm"` 可选，`data-tr-now` / `data-tr-ok`
+   - 水平菜单下拉：父菜单项加 `sw-menu__item--has-sub`，内部放 `.sw-menu__dropdown`，纯 CSS hover 驱动，无需额外 id

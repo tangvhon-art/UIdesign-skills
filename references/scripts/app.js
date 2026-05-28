@@ -478,6 +478,8 @@ function init(){
   // ========= DatePicker & TimePicker =========
   initDatePickers();
   initTimePickers();
+  initTimeRangePickers();
+  initHorizontalMenuDropdown();
 }
 
 document.addEventListener('DOMContentLoaded', init);
@@ -841,4 +843,172 @@ function initTimePickers() {
   }
 
   initTP('tp1');
+
+  // 仅时分（HH:mm）选择器 — data-tp-mode="hm"
+  $$('.sw-timepicker[data-tp-mode="hm"]').forEach(wrap => {
+    const id      = wrap.id;
+    if(!id) return;
+    const trigger = wrap.querySelector('.sw-timepicker__input');
+    const textEl  = document.getElementById(id+'-text');
+    const colsEl  = document.getElementById(id+'-cols');
+    if(!trigger || !textEl || !colsEl) return;
+
+    const now = new Date();
+    const state   = { h: now.getHours(), m: now.getMinutes() };
+    const pending = { h: state.h, m: state.m };
+
+    function renderCols(){
+      colsEl.innerHTML = '';
+      const hCol = document.createElement('div'); hCol.className = 'sw-timepicker__col';
+      const mCol = document.createElement('div'); mCol.className = 'sw-timepicker__col';
+      buildCol(hCol, '时', 24, pending.h, v => { pending.h = v; renderCols(); });
+      buildCol(mCol, '分', 60, pending.m, v => { pending.m = v; renderCols(); });
+      colsEl.appendChild(hCol);
+      colsEl.appendChild(mCol);
+    }
+
+    function open(){ pending.h = state.h; pending.m = state.m; wrap.dataset.open = 'true'; renderCols(); }
+    function close(){ wrap.dataset.open = 'false'; }
+    function confirm(){
+      state.h = pending.h; state.m = pending.m;
+      textEl.textContent = `${pad(state.h)}:${pad(state.m)}`;
+      textEl.classList.remove('sw-timepicker__input-text--placeholder');
+      close();
+    }
+
+    on(trigger, 'click', e => { e.stopPropagation(); wrap.dataset.open === 'true' ? close() : open(); });
+    const nowBtn = wrap.querySelector('[data-tp-now]');
+    if(nowBtn) on(nowBtn, 'click', () => { const n=new Date(); pending.h=n.getHours(); pending.m=n.getMinutes(); renderCols(); });
+    const okBtn = wrap.querySelector('[data-tp-ok]');
+    if(okBtn) on(okBtn, 'click', confirm);
+    document.addEventListener('click', e => { if(!wrap.contains(e.target)) close(); });
+  });
+}
+
+/* =============================================
+   TimeRangePicker（时间范围：开始时间 → 结束时间）
+   支持 data-tr-mode="hm"（仅时分）或默认时分秒
+   ============================================= */
+function initTimeRangePickers() {
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function buildCol(colEl, label, count, selected, onSelect) {
+    colEl.innerHTML = `<div class="sw-timepicker__col-label">${label}</div>`;
+    for(let i = 0; i < count; i++){
+      const item = document.createElement('div');
+      item.className = 'sw-timepicker__item';
+      item.textContent = pad(i);
+      item.dataset.val = i;
+      if(i === selected) item.dataset.selected = '';
+      item.addEventListener('click', () => onSelect(i));
+      colEl.appendChild(item);
+    }
+    const sel = colEl.querySelector('[data-selected]');
+    if(sel) requestAnimationFrame(() => sel.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  }
+
+  $$('.sw-timerange').forEach(wrap => {
+    const id     = wrap.id;
+    if(!id) return;
+    const trigger  = wrap.querySelector('.sw-timerange__input');
+    const startEl  = document.getElementById(id+'-start');
+    const endEl    = document.getElementById(id+'-end');
+    const panel    = wrap.querySelector('.sw-timerange__panel');
+    if(!trigger || !startEl || !endEl || !panel) return;
+
+    const hmOnly = wrap.dataset.trMode === 'hm';
+    const now    = new Date();
+    const defH   = now.getHours(), defM = now.getMinutes(), defS = now.getSeconds();
+
+    const stateS  = { h: defH, m: defM, s: defS };
+    const stateE  = { h: defH, m: defM, s: defS };
+    const pendS   = { ...stateS };
+    const pendE   = { ...stateE };
+
+    // 构建左右两侧列容器
+    const sideS = panel.querySelector('.sw-timerange__side:first-child .sw-timepicker__columns');
+    const sideE = panel.querySelector('.sw-timerange__side:last-child  .sw-timepicker__columns');
+    if(!sideS || !sideE) return;
+
+    function renderSide(colsEl, pend, onUpdate){
+      colsEl.innerHTML = '';
+      const hCol = document.createElement('div'); hCol.className = 'sw-timepicker__col';
+      const mCol = document.createElement('div'); mCol.className = 'sw-timepicker__col';
+      buildCol(hCol, '时', 24, pend.h, v => { pend.h = v; onUpdate(); });
+      buildCol(mCol, '分', 60, pend.m, v => { pend.m = v; onUpdate(); });
+      colsEl.appendChild(hCol);
+      colsEl.appendChild(mCol);
+      if(!hmOnly){
+        const sCol = document.createElement('div'); sCol.className = 'sw-timepicker__col';
+        buildCol(sCol, '秒', 60, pend.s, v => { pend.s = v; onUpdate(); });
+        colsEl.appendChild(sCol);
+      }
+    }
+
+    function fmt(p){ return hmOnly ? `${pad(p.h)}:${pad(p.m)}` : `${pad(p.h)}:${pad(p.m)}:${pad(p.s)}`; }
+
+    function open(){
+      Object.assign(pendS, stateS); Object.assign(pendE, stateE);
+      wrap.dataset.open = 'true';
+      renderSide(sideS, pendS, () => renderSide(sideS, pendS, ()=>{}));
+      renderSide(sideE, pendE, () => renderSide(sideE, pendE, ()=>{}));
+    }
+    function close(){ wrap.dataset.open = 'false'; }
+    function confirm(){
+      Object.assign(stateS, pendS); Object.assign(stateE, pendE);
+      startEl.textContent = fmt(stateS);
+      endEl.textContent   = fmt(stateE);
+      startEl.classList.remove('sw-timerange__text--placeholder');
+      endEl.classList.remove('sw-timerange__text--placeholder');
+      close();
+    }
+
+    on(trigger, 'click', e => { e.stopPropagation(); wrap.dataset.open === 'true' ? close() : open(); });
+    const nowBtn = wrap.querySelector('[data-tr-now]');
+    if(nowBtn) on(nowBtn, 'click', () => {
+      const n = new Date();
+      pendS.h = pendE.h = n.getHours();
+      pendS.m = pendE.m = n.getMinutes();
+      if(!hmOnly){ pendS.s = pendE.s = n.getSeconds(); }
+      renderSide(sideS, pendS, ()=>{});
+      renderSide(sideE, pendE, ()=>{});
+    });
+    const okBtn = wrap.querySelector('[data-tr-ok]');
+    if(okBtn) on(okBtn, 'click', confirm);
+    document.addEventListener('click', e => { if(!wrap.contains(e.target)) close(); });
+  });
+}
+
+/* =============================================
+   水平菜单 — 悬浮下拉子菜单（纯 CSS hover 驱动，
+   JS 仅处理键盘 Escape 关闭 & 激活项切换）
+   ============================================= */
+function initHorizontalMenuDropdown() {
+  // 激活项点击切换（叶子菜单项）
+  $$('.sw-menu--horizontal .sw-menu__item:not(.sw-menu__item--has-sub)').forEach(item => {
+    on(item, 'click', () => {
+      const menu = item.closest('.sw-menu--horizontal');
+      $$('.sw-menu__item[aria-current="page"]', menu).forEach(i => i.removeAttribute('aria-current'));
+      item.setAttribute('aria-current', 'page');
+    });
+  });
+
+  // 下拉内叶子项点击：更新顶层父项激活态
+  $$('.sw-menu--horizontal .sw-menu__dropdown .sw-menu__item:not(.sw-menu__item--has-sub)').forEach(item => {
+    on(item, 'click', e => {
+      e.stopPropagation();
+      const topItem = item.closest('.sw-menu--horizontal > .sw-menu__item--has-sub');
+      const menu    = item.closest('.sw-menu--horizontal');
+      if(menu) $$('.sw-menu__item[aria-current="page"]', menu).forEach(i => i.removeAttribute('aria-current'));
+      if(topItem) topItem.setAttribute('aria-current', 'page');
+    });
+  });
+
+  // Escape 关闭（CSS hover 自动关闭，此处仅作键盘支持）
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){
+      // 移除 focus，让 CSS :hover 失效
+      if(document.activeElement) document.activeElement.blur();
+    }
+  });
 }
