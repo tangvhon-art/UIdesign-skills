@@ -24,7 +24,7 @@ metadata:
 | 查找 CSS 变量（颜色/间距/阴影） | `references/design-tokens.md` |
 
 **第三步：直接复制代码**
-`references/component-classes.md` 中每个组件都有完整可用的 HTML 片段，直接复制，不要自己编写 class 名。
+`references/component-classes.md` 中每个组件都有完整可用的 HTML 片段，按需提取相关的内容进行复用，复用过程中不要改变UI风格
 
 ---
 
