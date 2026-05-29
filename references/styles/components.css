@@ -3309,3 +3309,149 @@ html[data-theme="dark"] .sw-watermark::after {
   color: var(--sw-text);
   font-weight: 600;
 }
+
+/* =============================================
+   页签导航 PageTabs
+   场景：点击菜单/导航项时在顶部动态追加新标签页，
+         类似浏览器多标签，支持刷新、关闭、激活切换。
+   ============================================= */
+
+.sw-pagetabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--sw-split);
+  background: var(--sw-bg-elevated);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  min-height: 38px;
+  flex-shrink: 0;
+}
+
+.sw-pagetabs::-webkit-scrollbar { display: none; }
+
+/* 单个页签 */
+.sw-pagetab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 10px 0 12px;
+  border: 1px solid var(--sw-split);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: var(--sw-fill);
+  color: var(--sw-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+  transition:
+    background var(--sw-dur-1) var(--sw-ease),
+    color var(--sw-dur-1) var(--sw-ease);
+  flex-shrink: 0;
+}
+
+.sw-pagetab:hover {
+  background: var(--sw-fill-hover);
+  color: var(--sw-text);
+}
+
+/* 激活态：白底 + 蓝色文字 + 底部白色遮住分割线 */
+.sw-pagetab[aria-selected="true"] {
+  background: var(--sw-bg-elevated);
+  color: var(--sw-primary);
+  font-weight: 600;
+  border-color: var(--sw-split);
+  /* 用伪元素盖住底部边框，让激活 tab 与内容区融为一体 */
+  z-index: 1;
+}
+
+.sw-pagetab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--sw-bg-elevated);
+}
+
+/* 刷新图标按钮 */
+.sw-pagetab__refresh {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--sw-text-tertiary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color var(--sw-dur-1) var(--sw-ease), background var(--sw-dur-1) var(--sw-ease);
+}
+
+.sw-pagetab__refresh:hover {
+  color: var(--sw-text-secondary);
+  background: var(--sw-fill-active);
+}
+
+/* 刷新中旋转动画 */
+.sw-pagetab__refresh--spinning svg {
+  animation: swPageTabSpin 0.6s linear infinite;
+}
+
+@keyframes swPageTabSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* 关闭按钮（仅激活 tab 显示） */
+.sw-pagetab__close {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--sw-text-tertiary);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color var(--sw-dur-1) var(--sw-ease), background var(--sw-dur-1) var(--sw-ease);
+}
+
+.sw-pagetab[aria-selected="true"] .sw-pagetab__close {
+  display: inline-flex;
+}
+
+.sw-pagetab__close:hover {
+  color: var(--sw-error);
+  background: color-mix(in oklab, var(--sw-error) 12%, transparent);
+}
+
+/* 页签标题文字 */
+.sw-pagetab__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+/* 入场动画 */
+@keyframes swPageTabIn {
+  from { opacity: 0; transform: translateY(4px) scaleX(0.9); transform-origin: left; }
+  to   { opacity: 1; transform: translateY(0) scaleX(1); }
+}
+
+.sw-pagetab--new {
+  animation: swPageTabIn 180ms var(--sw-ease) both;
+}

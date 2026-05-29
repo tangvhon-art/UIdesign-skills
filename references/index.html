@@ -154,6 +154,15 @@
               </div>
             </div>
 
+            <!-- 导航增强 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">导航增强</div>
+              <div class="sw-menu__item" data-target="sec-pagetabs">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2"/><path d="M2 10h20" stroke="currentColor" stroke-width="2"/><path d="M6 6V4M10 6V4M14 6V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                PageTabs 页签导航
+              </div>
+            </div>
+
             <!-- AI 交互 -->
             <div class="sw-menu__group">
               <div class="sw-menu__label">AI 交互</div>
@@ -1464,6 +1473,76 @@
                 <span class="sw-muted" style="font-size:12px">提示：将本页 HTML 中的组件区块复制到你的项目即可复用。</span>
                 <span style="margin-left:auto"></span>
                 <button class="sw-btn sw-btn--link" onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
+              </div>
+            </div>
+
+            <!-- ===== PageTabs ===== -->
+            <div id="sec-pagetabs" class="sw-card">
+              <div class="sw-card__hd">
+                <div>
+                  <h2 class="sw-h2">PageTabs 页签导航</h2>
+                  <p class="sw-desc">点击下方菜单项动态追加新标签页。每个 tab 带刷新图标，激活 tab 显示关闭按钮，同名 tab 不重复追加。</p>
+                </div>
+                <span class="sw-tag sw-tag--blue">.sw-pagetabs</span>
+              </div>
+              <div class="sw-card__bd" style="padding:0;overflow:hidden;border-radius:0 0 14px 14px;">
+
+                <!-- 模拟 Shell 布局：左侧菜单 + 右侧页签区 -->
+                <div style="display:flex;height:260px;">
+
+                  <!-- 左侧菜单 -->
+                  <div style="width:160px;border-right:1px solid var(--sw-split);padding:12px 8px;flex-shrink:0;overflow-y:auto;background:var(--sw-bg-elevated);">
+                    <div style="font-size:11px;color:var(--sw-text-tertiary);padding:4px 8px 8px;font-weight:600;letter-spacing:.5px;">内容管理</div>
+                    <div class="sw-menu__item" style="border-radius:8px;padding:8px 10px;font-size:13px;"
+                         data-pagetab-open="发布中心" data-pagetab-target="demoPageTabs">
+                      <span class="sw-menu__icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                      发布中心
+                    </div>
+                    <div class="sw-menu__item" style="border-radius:8px;padding:8px 10px;font-size:13px;"
+                         data-pagetab-open="全部内容" data-pagetab-target="demoPageTabs">
+                      <span class="sw-menu__icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+                      全部内容
+                    </div>
+                    <div class="sw-menu__item" style="border-radius:8px;padding:8px 10px;font-size:13px;"
+                         data-pagetab-open="频道管理" data-pagetab-target="demoPageTabs">
+                      <span class="sw-menu__icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg></span>
+                      频道管理
+                    </div>
+                    <div class="sw-menu__item" style="border-radius:8px;padding:8px 10px;font-size:13px;"
+                         data-pagetab-open="数据报表" data-pagetab-target="demoPageTabs">
+                      <span class="sw-menu__icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M7 15l4-4 5 5 4-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      数据报表
+                    </div>
+                    <div class="sw-menu__item" style="border-radius:8px;padding:8px 10px;font-size:13px;"
+                         data-pagetab-open="系统设置" data-pagetab-target="demoPageTabs">
+                      <span class="sw-menu__icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="2"/></svg></span>
+                      系统设置
+                    </div>
+                  </div>
+
+                  <!-- 右侧：页签栏 + 内容区 -->
+                  <div style="flex:1;display:flex;flex-direction:column;min-width:0;background:var(--sw-bg-layout);">
+
+                    <!-- 页签栏 -->
+                    <div class="sw-pagetabs" id="demoPageTabs" role="tablist" aria-label="页签导航" style="background:var(--sw-bg-elevated);">
+                      <!-- 默认首页 tab（不可关闭） -->
+                      <div class="sw-pagetab" aria-selected="true" role="tab">
+                        <span class="sw-pagetab__label">发布中心</span>
+                        <button class="sw-pagetab__refresh" title="刷新" aria-label="刷新 发布中心">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- 内容占位 -->
+                    <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--sw-text-tertiary);font-size:13px;gap:8px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      点击左侧菜单项打开新标签页
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
             </div>
 

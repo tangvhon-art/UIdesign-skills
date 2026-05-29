@@ -1240,3 +1240,122 @@ function initAIChat() {
 
 // 在 DOMContentLoaded 后自动初始化
 document.addEventListener('DOMContentLoaded', initAIChat);
+
+/* =============================================
+   页签导航 PageTabs（sw-pagetabs）
+   - 点击 [data-pagetab-open] 按钮/菜单项追加新 tab
+   - 点击 tab 切换激活
+   - 点击刷新图标触发短暂旋转动画（业务自行接入刷新逻辑）
+   - 点击关闭移除 tab，自动激活相邻 tab
+   - 不可关闭最后一个 tab
+   ============================================= */
+function initPageTabs() {
+  $$('.sw-pagetabs').forEach(bar => {
+
+    // ---- 激活指定 tab ----
+    function activate(tab) {
+      if (!tab) return;
+      $$('.sw-pagetab[aria-selected="true"]', bar).forEach(t => t.setAttribute('aria-selected', 'false'));
+      tab.setAttribute('aria-selected', 'true');
+      // 滚动到可见区域
+      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    }
+
+    // ---- 关闭 tab ----
+    function closeTab(tab) {
+      const tabs = $$('.sw-pagetab', bar);
+      if (tabs.length <= 1) return; // 最后一个不可关闭
+      const isActive = tab.getAttribute('aria-selected') === 'true';
+      const idx = tabs.indexOf(tab);
+
+      tab.style.transition = 'opacity 150ms var(--sw-ease), transform 150ms var(--sw-ease)';
+      tab.style.opacity = '0';
+      tab.style.transform = 'translateY(-4px)';
+      setTimeout(() => {
+        tab.remove();
+        if (isActive) {
+          const remaining = $$('.sw-pagetab', bar);
+          // 优先激活右侧，否则左侧
+          activate(remaining[idx] || remaining[idx - 1]);
+        }
+      }, 160);
+    }
+
+    // ---- 绑定已有 tab 的交互 ----
+    function bindTab(tab) {
+      // 点击 tab 主体激活
+      tab.addEventListener('click', e => {
+        if (e.target.closest('.sw-pagetab__close') || e.target.closest('.sw-pagetab__refresh')) return;
+        activate(tab);
+      });
+
+      // 刷新按钮
+      const refreshBtn = tab.querySelector('.sw-pagetab__refresh');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          refreshBtn.classList.add('sw-pagetab__refresh--spinning');
+          setTimeout(() => refreshBtn.classList.remove('sw-pagetab__refresh--spinning'), 600);
+        });
+      }
+
+      // 关闭按钮
+      const closeBtn = tab.querySelector('.sw-pagetab__close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', e => {
+          e.stopPropagation();
+          closeTab(tab);
+        });
+      }
+    }
+
+    // 初始化已有 tab
+    $$('.sw-pagetab', bar).forEach(bindTab);
+
+    // ---- 动态追加新 tab ----
+    // 任何带 data-pagetab-open="标题" 的元素点击后追加新 tab
+    // 若同名 tab 已存在则直接激活，不重复追加
+    document.querySelectorAll('[data-pagetab-open]').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const label = trigger.getAttribute('data-pagetab-open') || trigger.textContent.trim();
+        const target = trigger.getAttribute('data-pagetab-target') || bar.id || '';
+
+        // 如果指定了 target，只响应对应 bar
+        if (target && bar.id && target !== bar.id) return;
+
+        // 已存在同名 tab → 直接激活
+        const existing = $$('.sw-pagetab', bar).find(t => {
+          const lbl = t.querySelector('.sw-pagetab__label');
+          return (lbl ? lbl.textContent : t.dataset.pagetabKey) === label;
+        });
+        if (existing) { activate(existing); return; }
+
+        // 创建新 tab
+        const tab = document.createElement('div');
+        tab.className = 'sw-pagetab sw-pagetab--new';
+        tab.setAttribute('aria-selected', 'false');
+        tab.setAttribute('role', 'tab');
+        tab.innerHTML = `
+          <span class="sw-pagetab__label">${escapeHtml(label)}</span>
+          <button class="sw-pagetab__refresh" title="刷新" aria-label="刷新 ${escapeHtml(label)}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="sw-pagetab__close" title="关闭" aria-label="关闭 ${escapeHtml(label)}">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+              <path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>`;
+
+        bar.appendChild(tab);
+        bindTab(tab);
+        activate(tab);
+      });
+    });
+  });
+}
+
+// 在 DOMContentLoaded 后自动初始化
+document.addEventListener('DOMContentLoaded', initPageTabs);

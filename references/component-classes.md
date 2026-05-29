@@ -1061,3 +1061,148 @@ AI 响应期间，`app.js` 会自动切换按钮样式。如需手动展示停�
 | 重新生成 | `app.js` → `initAIChat()` |
 | 旋转加载图标（sw-ai-loading） | 纯 CSS，无需 JS |
 | 进度步骤状态（sw-ai-progress） | 纯 CSS，状态切换由业务代码控制 |
+
+
+## 页签导航 PageTabs
+
+**场景**：点击侧边菜单或导航项时，在内容区顶部动态追加新标签页（类似浏览器多标签）。每个 tab 带刷新图标，激活 tab 额外显示关闭按钮。
+
+**交互依赖**：需 `app.js`（`initPageTabs()` 自动初始化，无需手动调用）。
+
+### 变体一览
+
+| class / 属性 | 说明 |
+|---|---|
+| `sw-pagetabs` | 页签栏容器，横向滚动，底部有分割线 |
+| `sw-pagetab` | 单个页签，`aria-selected="true"` 为激活态 |
+| `sw-pagetab--new` | 新追加时的入场动画 class（JS 自动添加） |
+| `sw-pagetab__label` | 页签标题文字 |
+| `sw-pagetab__refresh` | 刷新图标按钮（每个 tab 都有） |
+| `sw-pagetab__close` | 关闭按钮（仅激活 tab 显示） |
+| `data-pagetab-open="标题"` | 触发器属性，点击后向 `sw-pagetabs` 追加同名 tab |
+| `data-pagetab-target="barId"` | 可选，指定追加到哪个 `sw-pagetabs`（多栏场景） |
+
+---
+
+### 静态 HTML 结构
+
+```html
+<!-- 页签栏（放在内容区顶部，sw-content 内或 sw-header 下方） -->
+<div class="sw-pagetabs" id="mainPageTabs" role="tablist" aria-label="页签导航">
+
+  <!-- 固定首页 tab（不可关闭，无关闭按钮） -->
+  <div class="sw-pagetab" aria-selected="true" role="tab">
+    <span class="sw-pagetab__label">发布中心</span>
+    <button class="sw-pagetab__refresh" title="刷新" aria-label="刷新 发布中心">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+        <path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <!-- 首页不放 sw-pagetab__close，使其不可关闭 -->
+  </div>
+
+  <!-- 普通 tab（可关闭） -->
+  <div class="sw-pagetab" aria-selected="false" role="tab">
+    <span class="sw-pagetab__label">全部内容</span>
+    <button class="sw-pagetab__refresh" title="刷新" aria-label="刷新 全部内容">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+        <path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="sw-pagetab__close" title="关闭" aria-label="关闭 全部内容">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+        <path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- 激活态 tab（蓝色文字 + 关闭按钮可见） -->
+  <div class="sw-pagetab" aria-selected="true" role="tab">
+    <span class="sw-pagetab__label">频道管理</span>
+    <button class="sw-pagetab__refresh" title="刷新" aria-label="刷新 频道管理">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+        <path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="sw-pagetab__close" title="关闭" aria-label="关闭 频道管理">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+        <path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+</div>
+```
+
+---
+
+### 动态追加 tab（菜单项触发）
+
+给任意菜单项或按钮加 `data-pagetab-open="页面名称"` 属性，点击后自动追加新 tab。若同名 tab 已存在则直接激活，不重复追加。
+
+```html
+<!-- 侧边菜单项：点击追加新 tab -->
+<div class="sw-menu__item" data-pagetab-open="订单管理" data-pagetab-target="mainPageTabs">
+  订单管理
+</div>
+<div class="sw-menu__item" data-pagetab-open="商品列表" data-pagetab-target="mainPageTabs">
+  商品列表
+</div>
+
+<!-- 普通按钮也可触发 -->
+<button class="sw-btn" data-pagetab-open="数据报表" data-pagetab-target="mainPageTabs">
+  打开报表
+</button>
+```
+
+---
+
+### 与 Shell 布局结合的完整示例
+
+```html
+<div class="sw-shell" data-sider-open="false">
+  <aside class="sw-sider">
+    <!-- 侧边菜单，菜单项加 data-pagetab-open -->
+    <nav class="sw-menu">
+      <div class="sw-menu__item" aria-current="page" data-pagetab-open="发布中心" data-pagetab-target="mainPageTabs">发布中心</div>
+      <div class="sw-menu__item" data-pagetab-open="全部内容" data-pagetab-target="mainPageTabs">全部内容</div>
+      <div class="sw-menu__item" data-pagetab-open="频道管理" data-pagetab-target="mainPageTabs">频道管理</div>
+    </nav>
+  </aside>
+  <main class="sw-main">
+    <header class="sw-header">...</header>
+
+    <!-- 页签栏紧贴 header 下方，在 sw-content 之前 -->
+    <div class="sw-pagetabs" id="mainPageTabs" role="tablist">
+      <div class="sw-pagetab" aria-selected="true" role="tab">
+        <span class="sw-pagetab__label">发布中心</span>
+        <button class="sw-pagetab__refresh" title="刷新" aria-label="刷新">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <section class="sw-content">
+      <div class="sw-page">
+        <!-- 页面内容 -->
+      </div>
+    </section>
+  </main>
+</div>
+```
+
+---
+
+### 交互行为说明
+
+| 操作 | 行为 |
+|------|------|
+| 点击 tab 主体 | 激活该 tab（蓝色文字，底部白色融合线） |
+| 点击刷新图标 | 图标旋转 0.6s（业务自行监听后接入刷新逻辑） |
+| 点击关闭按钮 | 移除 tab，自动激活右侧相邻 tab，无则激活左侧 |
+| 最后一个 tab | 不可关闭（`closeTab` 内部保护） |
+| 点击 `data-pagetab-open` 触发器 | 追加新 tab 并激活；同名已存在则直接激活 |
+| 新 tab 入场 | `sw-pagetab--new` 触发 180ms 滑入动画 |
