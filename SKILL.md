@@ -117,6 +117,7 @@ metadata:
 | 分割线 | `## 分割线 Divider` |
 | 下拉菜单、用户菜单 | `## 下拉菜单 Dropdown` |
 | 标题、正文、文本样式 | `## 排版 Typography` |
+| **页签导航、多标签页、浏览器标签、动态追加 tab** | `## 页签导航 PageTabs` |
 | **AI 对话框、聊天界面、对话输入框** | `## AI 对话 AI Chat` |
 | **AI 等待、思考动画、三点跳动** | `## AI 对话 AI Chat` → 完整对话框 → 等待状态 |
 | **流式输出、打字光标、逐字显示** | `## AI 对话 AI Chat` → 完整对话框 → 流式输出 |
@@ -146,3 +147,4 @@ metadata:
    - TimeRangePicker：`id` 自定义（如 `id="tr1"`），内部 `id="tr1-start"` / `id="tr1-end"`，`data-tr-mode="hm"` 可选，`data-tr-now` / `data-tr-ok`
    - 水平菜单下拉：父菜单项加 `sw-menu__item--has-sub`，内部放 `.sw-menu__dropdown`，纯 CSS hover 驱动，无需额外 id
    - **AI Chat**：容器需设置固定高度（如 `style="height:600px"`）；`sw-chat__textarea` + `sw-chat__send` 由 `app.js` 自动初始化，无需额外 id；`sw-ai-loading` / `sw-ai-progress` 为纯 CSS，无需 JS
+   - **PageTabs**：`sw-pagetabs` 由 `app.js` 自动初始化；触发器加 `data-pagetab-open="标题"` 即可动态追加 tab；多个页签栏时用 `data-pagetab-target="barId"` 指定目标栏
