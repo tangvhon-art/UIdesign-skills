@@ -154,6 +154,15 @@
               </div>
             </div>
 
+            <!-- AI 交互 -->
+            <div class="sw-menu__group">
+              <div class="sw-menu__label">AI 交互</div>
+              <div class="sw-menu__item" data-target="sec-ai-chat">
+                <span class="sw-menu__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.7 1.24 5.12 3.2 6.8L4 22l4.8-1.6A10.3 10.3 0 0 0 12 21c5.52 0 10-4.03 10-9S17.52 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 11h.01M12 11h.01M16 11h.01" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+                AI Chat 对话
+              </div>
+            </div>
+
           </nav>
         </div>
       </aside>
@@ -1455,6 +1464,177 @@
                 <span class="sw-muted" style="font-size:12px">提示：将本页 HTML 中的组件区块复制到你的项目即可复用。</span>
                 <span style="margin-left:auto"></span>
                 <button class="sw-btn sw-btn--link" onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
+              </div>
+            </div>
+
+            <!-- ===== AI Chat ===== -->
+            <div id="sec-ai-chat" class="sw-card">
+              <div class="sw-card__hd">
+                <div>
+                  <h2 class="sw-h2">AI Chat 对话</h2>
+                  <p class="sw-desc">AI 对话输入框范式、消息气泡、等待状态（三点动画 / 流式光标 / 进度步骤）。输入内容后按 Enter 或点击发送体验完整交互。</p>
+                </div>
+                <span class="sw-tag sw-tag--blue">.sw-chat</span>
+              </div>
+              <div class="sw-card__bd">
+                <div class="sw-grid">
+
+                  <!-- 左列：完整对话框 -->
+                  <div class="sw-col-8">
+                    <div class="sw-muted" style="font-size:12px;margin-bottom:10px">完整对话框（输入 + 发送 + 流式演示）</div>
+                    <div class="sw-chat" style="height:480px;">
+
+                      <!-- 消息列表 -->
+                      <div class="sw-chat__messages">
+
+                        <!-- AI 欢迎消息 -->
+                        <div class="sw-chat__msg sw-chat__msg--ai">
+                          <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+                          <div class="sw-chat__msg-body">
+                            <div class="sw-chat__msg-name">AI 助手</div>
+                            <div class="sw-chat__msg-bubble">你好！我是 sw-ui 内置的 AI 助手演示。请在下方输入框中输入任意内容，按 <kbd style="font-size:11px;padding:1px 5px;border:1px solid var(--sw-border);border-radius:4px;background:var(--sw-fill)">Enter</kbd> 发送，体验完整的对话交互流程。</div>
+                            <div class="sw-chat__msg-actions" aria-label="消息操作">
+                              <button class="sw-chat__msg-action" title="复制" data-chat-copy>
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="13" height="13" rx="3" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2"/></svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <!-- 输入区 -->
+                      <div class="sw-chat__input-area">
+
+                        <!-- 工具栏 -->
+                        <div class="sw-chat__toolbar">
+                          <button class="sw-chat__tool-btn sw-chat__tool-btn--active">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2Z" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            深度思考
+                          </button>
+                          <button class="sw-chat__tool-btn">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            联网搜索
+                          </button>
+                        </div>
+
+                        <!-- 输入行 -->
+                        <div class="sw-chat__input-row">
+                          <textarea
+                            class="sw-chat__textarea"
+                            placeholder="输入消息，Enter 发送，Shift+Enter 换行…"
+                            rows="1"
+                            aria-label="消息输入框"
+                          ></textarea>
+                          <button class="sw-chat__send" title="发送" aria-label="发送消息" data-empty="true" disabled>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                              <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M22 2L15 22l-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </button>
+                        </div>
+
+                        <!-- 状态栏 -->
+                        <div class="sw-chat__status">
+                          <span class="sw-chat__status-hint">
+                            <kbd style="font-size:10px;padding:1px 4px;border:1px solid var(--sw-border);border-radius:4px;">Enter</kbd>
+                            发送 &nbsp;·&nbsp;
+                            <kbd style="font-size:10px;padding:1px 4px;border:1px solid var(--sw-border);border-radius:4px;">Shift+Enter</kbd>
+                            换行
+                          </span>
+                          <span><span data-chat-count>0</span> 字</span>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 右列：等待状态展示 -->
+                  <div class="sw-col-4">
+                    <div class="sw-muted" style="font-size:12px;margin-bottom:10px">等待状态变体</div>
+
+                    <div style="display:flex;flex-direction:column;gap:12px;">
+
+                      <!-- 三点等待动画 -->
+                      <div>
+                        <div class="sw-muted" style="font-size:11px;margin-bottom:6px;">① 思考中（三点跳动）</div>
+                        <div class="sw-chat__msg sw-chat__msg--ai sw-chat__msg--thinking">
+                          <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+                          <div class="sw-chat__msg-body">
+                            <div class="sw-chat__msg-name">AI 助手</div>
+                            <div class="sw-chat__msg-bubble" aria-label="AI 正在思考">
+                              <span class="sw-chat__thinking-dot"></span>
+                              <span class="sw-chat__thinking-dot"></span>
+                              <span class="sw-chat__thinking-dot"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 流式输出光标 -->
+                      <div>
+                        <div class="sw-muted" style="font-size:11px;margin-bottom:6px;">② 流式输出（闪烁光标）</div>
+                        <div class="sw-chat__msg sw-chat__msg--ai">
+                          <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+                          <div class="sw-chat__msg-body">
+                            <div class="sw-chat__msg-name">AI 助手</div>
+                            <div class="sw-chat__msg-bubble">
+                              正在为您生成回答，请稍候<span class="sw-chat__cursor" aria-hidden="true"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 骨架屏等待 -->
+                      <div>
+                        <div class="sw-muted" style="font-size:11px;margin-bottom:6px;">③ 骨架屏（内容加载中）</div>
+                        <div class="sw-chat__msg sw-chat__msg--ai">
+                          <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+                          <div class="sw-chat__msg-body">
+                            <div class="sw-chat__msg-name">AI 助手</div>
+                            <div class="sw-chat__msg-bubble" role="status" aria-label="内容加载中">
+                              <div class="sw-skeleton" style="padding:0;gap:8px;">
+                                <div class="sw-skeleton__line sw-skeleton__line--lg"></div>
+                                <div class="sw-skeleton__line sw-skeleton__line--md"></div>
+                                <div class="sw-skeleton__line" style="width:55%"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 行内等待提示条 -->
+                      <div>
+                        <div class="sw-muted" style="font-size:11px;margin-bottom:6px;">④ 行内等待提示条</div>
+                        <div class="sw-ai-loading" role="status" aria-live="polite">
+                          <div class="sw-ai-loading__spinner" aria-hidden="true"></div>
+                          AI 正在分析数据，请稍候…
+                        </div>
+                      </div>
+
+                      <!-- 进度步骤 -->
+                      <div>
+                        <div class="sw-muted" style="font-size:11px;margin-bottom:6px;">⑤ 多步骤进度等待</div>
+                        <div class="sw-ai-progress" role="status" aria-live="polite">
+                          <div class="sw-ai-progress__step sw-ai-progress__step--done">
+                            <div class="sw-ai-progress__step-icon" aria-hidden="true">✓</div>
+                            <div class="sw-ai-progress__step-label">检索相关文档</div>
+                          </div>
+                          <div class="sw-ai-progress__step sw-ai-progress__step--active">
+                            <div class="sw-ai-progress__step-icon" aria-hidden="true"></div>
+                            <div class="sw-ai-progress__step-label">分析数据内容…</div>
+                          </div>
+                          <div class="sw-ai-progress__step sw-ai-progress__step--pending">
+                            <div class="sw-ai-progress__step-icon" aria-hidden="true">○</div>
+                            <div class="sw-ai-progress__step-label">生成最终报告</div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
 

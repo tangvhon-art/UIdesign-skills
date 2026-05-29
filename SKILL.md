@@ -1,19 +1,19 @@
 ---
 name: ui-design
-description: sw-ui component library for enterprise admin dashboards. Pure HTML+CSS+JS, Ant Design Pro style, zero dependencies. Use when building admin pages, management systems, dashboards, forms, tables, or any enterprise UI. Provides exact class names and copy-paste HTML snippets for buttons, cards, forms, tables, modals, drawers, alerts, navigation, and more.
+description: sw-ui component library for enterprise admin dashboards and AI-powered interfaces. Pure HTML+CSS+JS, Ant Design Pro style, zero dependencies. Use when building admin pages, management systems, dashboards, forms, tables, or any enterprise UI — including AI chat interfaces, streaming output, and loading states. Provides exact class names and copy-paste HTML snippets for buttons, cards, forms, tables, modals, drawers, alerts, navigation, AI chat input boxes, message bubbles, thinking animations, and more.
 metadata:
   author: UI Design Team
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # sw-ui 企业级组件库
 
-框架无关 · 零依赖 · Ant Design Pro 风格 · 支持亮色/暗色主题
+框架无关 · 零依赖 · Ant Design Pro 风格 · 支持亮色/暗色主题 · 内置 AI 对话组件
 
 ## 使用前必读
 
 **第一步：确认平台**
-- PC 端（中后台/管理系统）→ 使用本规范
+- PC 端（中后台/管理系统/AI 产品）→ 使用本规范
 - 移动端（H5/小程序）→ 不适用本规范，改用移动端方案
 
 **第二步：读取参考文件**
@@ -24,7 +24,7 @@ metadata:
 | 查找 CSS 变量（颜色/间距/阴影） | `references/design-tokens.md` |
 
 **第三步：直接复制代码**
-`references/component-classes.md` 中每个组件都有完整可用的 HTML 片段，按需提取相关的内容进行复用，复用过程中不要改变UI风格
+`references/component-classes.md` 中每个组件都有完整可用的 HTML 片段，按需提取相关内容进行复用，复用过程中不要改变 UI 风格。
 
 ---
 
@@ -117,6 +117,11 @@ metadata:
 | 分割线 | `## 分割线 Divider` |
 | 下拉菜单、用户菜单 | `## 下拉菜单 Dropdown` |
 | 标题、正文、文本样式 | `## 排版 Typography` |
+| **AI 对话框、聊天界面、对话输入框** | `## AI 对话 AI Chat` |
+| **AI 等待、思考动画、三点跳动** | `## AI 对话 AI Chat` → 完整对话框 → 等待状态 |
+| **流式输出、打字光标、逐字显示** | `## AI 对话 AI Chat` → 完整对话框 → 流式输出 |
+| **AI 加载提示、处理中提示条** | `## AI 对话 AI Chat` → 行内等待提示条（`sw-ai-loading`） |
+| **多步骤进度、AI 任务步骤** | `## AI 对话 AI Chat` → 进度式等待（`sw-ai-progress`） |
 | CSS 颜色变量、间距变量 | `references/design-tokens.md` |
 
 ---
@@ -125,7 +130,7 @@ metadata:
 
 1. **class 名必须从 `references/component-classes.md` 中复制**，不得自行命名
 2. **四个核心文件（tokens/base/components/app.js）禁止修改**
-3. **交互组件**（Modal、Drawer、Select、Switch、Tabs、Toast 等）依赖 `app.js`，必须引入
+3. **交互组件**（Modal、Drawer、Select、Switch、Tabs、Toast、AI Chat 等）依赖 `app.js`，必须引入
 4. **需要 JS 交互的组件**必须保留对应的 `id` 或 `data-*` 属性，否则交互失效：
    - Modal：`id="swModalOverlay"` / `id="swCloseModal"` / `id="swOkModal"`
    - Drawer：`id="swDrawer"` / `id="swCloseDrawer"`
@@ -140,3 +145,4 @@ metadata:
    - TimePicker（仅时分）：在 `sw-timepicker` 上加 `data-tp-mode="hm"`，id 自定义（如 `id="tp2"`），内部 `id="{id}-text"` / `id="{id}-cols"`
    - TimeRangePicker：`id` 自定义（如 `id="tr1"`），内部 `id="tr1-start"` / `id="tr1-end"`，`data-tr-mode="hm"` 可选，`data-tr-now` / `data-tr-ok`
    - 水平菜单下拉：父菜单项加 `sw-menu__item--has-sub`，内部放 `.sw-menu__dropdown`，纯 CSS hover 驱动，无需额外 id
+   - **AI Chat**：容器需设置固定高度（如 `style="height:600px"`）；`sw-chat__textarea` + `sw-chat__send` 由 `app.js` 自动初始化，无需额外 id；`sw-ai-loading` / `sw-ai-progress` 为纯 CSS，无需 JS

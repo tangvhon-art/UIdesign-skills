@@ -1012,3 +1012,231 @@ function initHorizontalMenuDropdown() {
     }
   });
 }
+
+/* =============================================
+   AI 对话输入框（sw-chat）
+   - 自动高度：textarea 随内容增长，最高 160px
+   - 发送按钮：空内容时禁用，响应中变为停止按钮
+   - Enter 发送，Shift+Enter 换行
+   - 演示模式：模拟 AI 流式输出 + 三点等待动画
+   ============================================= */
+function initAIChat() {
+  $$('.sw-chat').forEach(chat => {
+    const textarea  = chat.querySelector('.sw-chat__textarea');
+    const sendBtn   = chat.querySelector('.sw-chat__send');
+    const msgList   = chat.querySelector('.sw-chat__messages');
+    const charCount = chat.querySelector('[data-chat-count]');
+    if (!textarea || !sendBtn || !msgList) return;
+
+    let isThinking = false;
+    let streamTimer = null;
+
+    // ---- 自动高度 ----
+    function autoResize() {
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.min(textarea.scrollHeight, 160) + 'px';
+    }
+
+    // ---- 空内容禁用发送 ----
+    function updateSendState() {
+      const empty = textarea.value.trim() === '';
+      sendBtn.dataset.empty = empty ? 'true' : 'false';
+      sendBtn.disabled = empty || isThinking;
+    }
+
+    textarea.addEventListener('input', () => {
+      autoResize();
+      updateSendState();
+      if (charCount) charCount.textContent = textarea.value.length;
+    });
+
+    // ---- Enter 发送 / Shift+Enter 换行 ----
+    textarea.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (!sendBtn.disabled) doSend();
+      }
+    });
+
+    // ---- 发送 / 停止 ----
+    sendBtn.addEventListener('click', () => {
+      if (isThinking) {
+        stopStream();
+      } else {
+        doSend();
+      }
+    });
+
+    function doSend() {
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      // 追加用户消息
+      appendMsg('user', text);
+      textarea.value = '';
+      autoResize();
+      updateSendState();
+      if (charCount) charCount.textContent = '0';
+
+      // 进入等待状态
+      startThinking();
+    }
+
+    // ---- 追加消息气泡 ----
+    function appendMsg(role, text) {
+      const isUser = role === 'user';
+      const el = document.createElement('div');
+      el.className = `sw-chat__msg sw-chat__msg--${isUser ? 'user' : 'ai'}`;
+      el.innerHTML = `
+        <div class="sw-chat__msg-avatar" aria-hidden="true">${isUser ? '我' : 'AI'}</div>
+        <div class="sw-chat__msg-body">
+          <div class="sw-chat__msg-name">${isUser ? '你' : 'AI 助手'}</div>
+          <div class="sw-chat__msg-bubble">${escapeHtml(text)}</div>
+          ${!isUser ? `
+          <div class="sw-chat__msg-actions" aria-label="消息操作">
+            <button class="sw-chat__msg-action" title="复制" data-chat-copy>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                <rect x="9" y="9" width="13" height="13" rx="3" stroke="currentColor" stroke-width="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+            <button class="sw-chat__msg-action" title="重新生成" data-chat-regen>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                <path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>` : ''}
+        </div>
+      `;
+      msgList.appendChild(el);
+      scrollToBottom();
+
+      // 绑定复制
+      const copyBtn = el.querySelector('[data-chat-copy]');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard?.writeText(text).then(() => {
+            toast({ title: '已复制', desc: '消息内容已复制到剪贴板', tone: 'success' });
+          }).catch(() => {
+            toast({ title: '复制失败', desc: '请手动选中文字复制', tone: 'warning' });
+          });
+        });
+      }
+
+      // 绑定重新生成
+      const regenBtn = el.querySelector('[data-chat-regen]');
+      if (regenBtn) {
+        regenBtn.addEventListener('click', () => {
+          el.remove();
+          startThinking();
+        });
+      }
+
+      return el;
+    }
+
+    // ---- 三点等待动画 ----
+    function startThinking() {
+      isThinking = true;
+      sendBtn.classList.add('sw-chat__send--stop');
+      sendBtn.disabled = false;
+      sendBtn.title = '停止生成';
+      sendBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <rect x="5" y="5" width="14" height="14" rx="3" fill="currentColor"/>
+        </svg>`;
+
+      // 插入思考气泡
+      const thinkEl = document.createElement('div');
+      thinkEl.className = 'sw-chat__msg sw-chat__msg--ai sw-chat__msg--thinking';
+      thinkEl.id = 'swChatThinking';
+      thinkEl.innerHTML = `
+        <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+        <div class="sw-chat__msg-body">
+          <div class="sw-chat__msg-name">AI 助手</div>
+          <div class="sw-chat__msg-bubble" aria-label="AI 正在思考">
+            <span class="sw-chat__thinking-dot"></span>
+            <span class="sw-chat__thinking-dot"></span>
+            <span class="sw-chat__thinking-dot"></span>
+          </div>
+        </div>`;
+      msgList.appendChild(thinkEl);
+      scrollToBottom();
+
+      // 模拟延迟后开始流式输出
+      streamTimer = setTimeout(() => {
+        thinkEl.remove();
+        startStream();
+      }, 900 + Math.random() * 600);
+    }
+
+    // ---- 模拟流式输出 ----
+    function startStream() {
+      const demoReplies = [
+        '好的，我来帮你分析一下这个问题。根据你的描述，建议从以下几个方向入手：\n\n1. 首先确认数据来源是否准确\n2. 检查业务逻辑中的边界条件\n3. 对关键路径增加日志追踪\n\n如需进一步协助，请提供更多上下文。',
+        '这是一个很好的问题。简单来说，核心思路是将复杂流程拆解为可独立验证的小步骤，每步完成后再推进下一步，这样可以有效降低整体风险。',
+        '明白了。我建议优先处理高优先级的部分，其余内容可以在后续迭代中逐步完善。有什么具体需要我帮你起草或整理的吗？',
+      ];
+      const reply = demoReplies[Math.floor(Math.random() * demoReplies.length)];
+
+      const msgEl = appendMsg('ai', '');
+      const bubble = msgEl.querySelector('.sw-chat__msg-bubble');
+      bubble.textContent = '';
+
+      // 插入光标
+      const cursor = document.createElement('span');
+      cursor.className = 'sw-chat__cursor';
+      cursor.setAttribute('aria-hidden', 'true');
+      bubble.appendChild(cursor);
+
+      let i = 0;
+      function tick() {
+        if (!isThinking) return; // 已停止
+        if (i < reply.length) {
+          bubble.insertBefore(document.createTextNode(reply[i]), cursor);
+          i++;
+          scrollToBottom();
+          streamTimer = setTimeout(tick, 18 + Math.random() * 22);
+        } else {
+          // 输出完成
+          cursor.remove();
+          stopStream(false);
+        }
+      }
+      tick();
+    }
+
+    // ---- 停止生成 ----
+    function stopStream(removeLastMsg = false) {
+      clearTimeout(streamTimer);
+      isThinking = false;
+
+      // 移除思考气泡（如果还在）
+      document.getElementById('swChatThinking')?.remove();
+
+      // 移除光标
+      chat.querySelectorAll('.sw-chat__cursor').forEach(c => c.remove());
+
+      // 恢复发送按钮
+      sendBtn.classList.remove('sw-chat__send--stop');
+      sendBtn.title = '发送';
+      sendBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 2L15 22l-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
+      updateSendState();
+    }
+
+    function scrollToBottom() {
+      msgList.scrollTop = msgList.scrollHeight;
+    }
+
+    // 初始化状态
+    updateSendState();
+  });
+}
+
+// 在 DOMContentLoaded 后自动初始化
+document.addEventListener('DOMContentLoaded', initAIChat);

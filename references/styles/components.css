@@ -2887,3 +2887,425 @@ html[data-theme="dark"] .sw-watermark::after {
   transition: background var(--sw-dur-1) var(--sw-ease);
 }
 .sw-timerange__ok:hover { background: var(--sw-primary-hover); }
+
+/* =============================================
+   AI 对话组件 AI Chat
+   包含：对话输入框、消息气泡、等待状态
+   ============================================= */
+
+/* ---- 对话容器 ---- */
+.sw-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--sw-bg-elevated);
+  border-radius: 14px;
+  border: 1px solid var(--sw-split);
+  overflow: hidden;
+}
+
+/* ---- 消息列表区 ---- */
+.sw-chat__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+}
+
+/* ---- 消息气泡 ---- */
+.sw-chat__msg {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+/* 用户消息：右对齐 */
+.sw-chat__msg--user {
+  flex-direction: row-reverse;
+}
+
+.sw-chat__msg-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #1677ff, #69b1ff);
+  border: 1px solid var(--sw-split);
+}
+
+.sw-chat__msg--user .sw-chat__msg-avatar {
+  background: linear-gradient(135deg, #9254de, #b37feb);
+}
+
+.sw-chat__msg-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: min(72%, 640px);
+}
+
+.sw-chat__msg-name {
+  font-size: 11px;
+  color: var(--sw-text-tertiary);
+  padding: 0 4px;
+}
+
+.sw-chat__msg--user .sw-chat__msg-name {
+  text-align: right;
+}
+
+.sw-chat__msg-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--sw-text);
+  background: var(--sw-fill);
+  border: 1px solid var(--sw-split);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* 用户气泡：蓝色背景 */
+.sw-chat__msg--user .sw-chat__msg-bubble {
+  background: var(--sw-primary);
+  color: #fff;
+  border-color: transparent;
+  border-radius: 14px 4px 14px 14px;
+}
+
+/* AI 气泡：左侧圆角收窄 */
+.sw-chat__msg--ai .sw-chat__msg-bubble {
+  border-radius: 4px 14px 14px 14px;
+}
+
+/* ---- AI 等待状态（三点跳动） ---- */
+.sw-chat__msg--thinking .sw-chat__msg-bubble {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 56px;
+}
+
+.sw-chat__thinking-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: var(--sw-text-tertiary);
+  animation: swChatDot 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.sw-chat__thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+.sw-chat__thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes swChatDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ---- AI 流式输出光标 ---- */
+.sw-chat__cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--sw-primary);
+  border-radius: 2px;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: swChatCursor 0.9s ease-in-out infinite;
+}
+
+@keyframes swChatCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ---- 消息操作栏（hover 显示） ---- */
+.sw-chat__msg-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--sw-dur-1) var(--sw-ease);
+  padding: 0 4px;
+}
+
+.sw-chat__msg:hover .sw-chat__msg-actions {
+  opacity: 1;
+}
+
+.sw-chat__msg-action {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 1px solid var(--sw-split);
+  background: var(--sw-bg-elevated);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sw-text-tertiary);
+  transition: background var(--sw-dur-1) var(--sw-ease), color var(--sw-dur-1) var(--sw-ease);
+}
+
+.sw-chat__msg-action:hover {
+  background: var(--sw-fill-hover);
+  color: var(--sw-text);
+}
+
+/* ---- 输入框区域 ---- */
+.sw-chat__input-area {
+  border-top: 1px solid var(--sw-split);
+  padding: 12px 12px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--sw-bg-elevated);
+}
+
+/* 工具栏（附件、模型切换等） */
+.sw-chat__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sw-chat__tool-btn {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--sw-split);
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--sw-text-secondary);
+  transition: background var(--sw-dur-1) var(--sw-ease), color var(--sw-dur-1) var(--sw-ease);
+}
+
+.sw-chat__tool-btn:hover {
+  background: var(--sw-fill-hover);
+  color: var(--sw-text);
+}
+
+.sw-chat__tool-btn--active {
+  background: color-mix(in oklab, var(--sw-primary) 12%, transparent);
+  color: var(--sw-primary);
+  border-color: color-mix(in oklab, var(--sw-primary) 30%, var(--sw-split));
+}
+
+/* 输入行：文本框 + 发送按钮 */
+.sw-chat__input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.sw-chat__textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 160px;
+  border: 1px solid var(--sw-border);
+  background: var(--sw-bg-elevated);
+  color: var(--sw-text);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: none;
+  overflow-y: auto;
+  transition:
+    border-color var(--sw-dur-1) var(--sw-ease),
+    box-shadow var(--sw-dur-1) var(--sw-ease);
+  font-family: var(--sw-font-sans);
+}
+
+.sw-chat__textarea:hover {
+  border-color: color-mix(in oklab, var(--sw-primary) 35%, var(--sw-border));
+}
+
+.sw-chat__textarea:focus {
+  outline: none;
+  border-color: var(--sw-primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--sw-primary) 22%, transparent);
+}
+
+.sw-chat__textarea::placeholder {
+  color: var(--sw-text-tertiary);
+}
+
+.sw-chat__textarea:disabled {
+  background: var(--sw-fill);
+  cursor: not-allowed;
+}
+
+/* 发送按钮 */
+.sw-chat__send {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: var(--sw-primary);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background var(--sw-dur-1) var(--sw-ease),
+    transform var(--sw-dur-1) var(--sw-ease),
+    opacity var(--sw-dur-1) var(--sw-ease);
+  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.22);
+}
+
+.sw-chat__send:hover { background: var(--sw-primary-hover); }
+.sw-chat__send:active { transform: scale(0.93); }
+
+/* 发送按钮：禁用（输入为空时） */
+.sw-chat__send:disabled,
+.sw-chat__send[data-empty="true"] {
+  background: var(--sw-fill-active);
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 发送按钮：AI 响应中变为停止按钮 */
+.sw-chat__send--stop {
+  background: color-mix(in oklab, var(--sw-error) 88%, white);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.18);
+}
+
+.sw-chat__send--stop:hover {
+  background: var(--sw-error);
+}
+
+/* ---- 状态栏（字数、提示） ---- */
+.sw-chat__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px;
+  font-size: 11px;
+  color: var(--sw-text-tertiary);
+}
+
+.sw-chat__status-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---- 全局等待遮罩（页面级 AI 加载） ---- */
+.sw-ai-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--sw-primary) 8%, var(--sw-bg-elevated));
+  border: 1px solid color-mix(in oklab, var(--sw-primary) 18%, var(--sw-split));
+  font-size: 13px;
+  color: var(--sw-text-secondary);
+}
+
+.sw-ai-loading__spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 99px;
+  border: 2px solid color-mix(in oklab, var(--sw-primary) 25%, transparent);
+  border-top-color: var(--sw-primary);
+  animation: swSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes swSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- 进度式等待（带步骤文字） ---- */
+.sw-ai-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--sw-fill);
+  border: 1px solid var(--sw-split);
+  font-size: 12px;
+  color: var(--sw-text-secondary);
+}
+
+.sw-ai-progress__step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sw-ai-progress__step-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 10px;
+}
+
+/* 步骤状态 */
+.sw-ai-progress__step--done .sw-ai-progress__step-icon {
+  background: color-mix(in oklab, var(--sw-success) 18%, transparent);
+  color: var(--sw-success);
+}
+
+.sw-ai-progress__step--active .sw-ai-progress__step-icon {
+  background: color-mix(in oklab, var(--sw-primary) 14%, transparent);
+  color: var(--sw-primary);
+}
+
+.sw-ai-progress__step--active .sw-ai-progress__step-icon::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  border: 1.5px solid color-mix(in oklab, var(--sw-primary) 30%, transparent);
+  border-top-color: var(--sw-primary);
+  animation: swSpin 0.7s linear infinite;
+}
+
+.sw-ai-progress__step--pending .sw-ai-progress__step-icon {
+  background: var(--sw-fill);
+  color: var(--sw-text-quaternary);
+}
+
+.sw-ai-progress__step-label {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.sw-ai-progress__step--done .sw-ai-progress__step-label {
+  color: var(--sw-text-tertiary);
+  text-decoration: line-through;
+  text-decoration-color: var(--sw-text-quaternary);
+}
+
+.sw-ai-progress__step--active .sw-ai-progress__step-label {
+  color: var(--sw-text);
+  font-weight: 600;
+}

@@ -814,3 +814,250 @@
 <span class="sw-muted">灰色文字</span>
 <span class="sw-mono">等宽字体</span>
 ```
+
+
+## AI 对话 AI Chat
+
+**交互依赖**：需 `app.js`（自动高度、发送/停止、流式输出演示）。
+
+### 变体一览
+
+| 变体 | 说明 |
+|------|------|
+| `sw-chat` | 完整对话容器（消息列表 + 输入区） |
+| `sw-chat__msg--user` | 用户消息（右对齐，蓝色气泡） |
+| `sw-chat__msg--ai` | AI 消息（左对齐，灰色气泡） |
+| `sw-chat__msg--thinking` | AI 等待状态（三点跳动动画） |
+| `sw-chat__cursor` | 流式输出光标（闪烁竖线） |
+| `sw-chat__send--stop` | 发送按钮变为停止按钮（响应中） |
+| `sw-ai-loading` | 行内等待提示条（带旋转图标） |
+| `sw-ai-progress` | 进度式等待（多步骤状态列表） |
+
+---
+
+### 完整对话框
+
+```html
+<!-- 需要给容器设置固定高度，例如 height: 600px -->
+<div class="sw-chat" style="height: 600px;">
+
+  <!-- 消息列表 -->
+  <div class="sw-chat__messages">
+
+    <!-- AI 消息 -->
+    <div class="sw-chat__msg sw-chat__msg--ai">
+      <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+      <div class="sw-chat__msg-body">
+        <div class="sw-chat__msg-name">AI 助手</div>
+        <div class="sw-chat__msg-bubble">你好！有什么我可以帮你的吗？</div>
+        <div class="sw-chat__msg-actions" aria-label="消息操作">
+          <button class="sw-chat__msg-action" title="复制" data-chat-copy>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+              <rect x="9" y="9" width="13" height="13" rx="3" stroke="currentColor" stroke-width="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </button>
+          <button class="sw-chat__msg-action" title="重新生成" data-chat-regen>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+              <path d="M1 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3.51 15a9 9 0 1 0 .49-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 用户消息 -->
+    <div class="sw-chat__msg sw-chat__msg--user">
+      <div class="sw-chat__msg-avatar" aria-hidden="true">我</div>
+      <div class="sw-chat__msg-body">
+        <div class="sw-chat__msg-name">你</div>
+        <div class="sw-chat__msg-bubble">帮我分析一下这份数据报告的关键问题。</div>
+      </div>
+    </div>
+
+    <!-- AI 等待状态（三点跳动） -->
+    <div class="sw-chat__msg sw-chat__msg--ai sw-chat__msg--thinking">
+      <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+      <div class="sw-chat__msg-body">
+        <div class="sw-chat__msg-name">AI 助手</div>
+        <div class="sw-chat__msg-bubble" aria-label="AI 正在思考">
+          <span class="sw-chat__thinking-dot"></span>
+          <span class="sw-chat__thinking-dot"></span>
+          <span class="sw-chat__thinking-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI 流式输出中（带光标） -->
+    <div class="sw-chat__msg sw-chat__msg--ai">
+      <div class="sw-chat__msg-avatar" aria-hidden="true">AI</div>
+      <div class="sw-chat__msg-body">
+        <div class="sw-chat__msg-name">AI 助手</div>
+        <div class="sw-chat__msg-bubble">
+          好的，我来帮你分析……<span class="sw-chat__cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 输入区 -->
+  <div class="sw-chat__input-area">
+
+    <!-- 工具栏（可选） -->
+    <div class="sw-chat__toolbar">
+      <button class="sw-chat__tool-btn sw-chat__tool-btn--active">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        深度思考
+      </button>
+      <button class="sw-chat__tool-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        联网搜索
+      </button>
+    </div>
+
+    <!-- 输入行 -->
+    <div class="sw-chat__input-row">
+      <textarea
+        class="sw-chat__textarea"
+        placeholder="输入消息，Enter 发送，Shift+Enter 换行"
+        rows="1"
+        aria-label="消息输入框"
+      ></textarea>
+
+      <!-- 发送按钮（正常态） -->
+      <button class="sw-chat__send" title="发送" aria-label="发送消息" data-empty="true" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 2L15 22l-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 状态栏（可选） -->
+    <div class="sw-chat__status">
+      <span class="sw-chat__status-hint">
+        <kbd style="font-size:10px;padding:1px 4px;border:1px solid var(--sw-border);border-radius:4px;">Enter</kbd>
+        发送 &nbsp;·&nbsp;
+        <kbd style="font-size:10px;padding:1px 4px;border:1px solid var(--sw-border);border-radius:4px;">Shift+Enter</kbd>
+        换行
+      </span>
+      <span><span data-chat-count>0</span> 字</span>
+    </div>
+
+  </div>
+</div>
+```
+
+---
+
+### 发送按钮：响应中（停止态）
+
+AI 响应期间，`app.js` 会自动切换按钮样式。如需手动展示停止态：
+
+```html
+<!-- 停止按钮（响应中） -->
+<button class="sw-chat__send sw-chat__send--stop" title="停止生成" aria-label="停止生成">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <rect x="5" y="5" width="14" height="14" rx="3" fill="currentColor"/>
+  </svg>
+</button>
+```
+
+---
+
+### 行内等待提示条（sw-ai-loading）
+
+适用于页面内嵌的 AI 处理等待提示，不依赖完整对话容器。
+
+```html
+<div class="sw-ai-loading" role="status" aria-live="polite">
+  <div class="sw-ai-loading__spinner" aria-hidden="true"></div>
+  AI 正在分析数据，请稍候…
+</div>
+```
+
+---
+
+### 进度式等待（sw-ai-progress）
+
+适用于多步骤 AI 任务（如：检索 → 分析 → 生成），展示当前执行阶段。
+
+```html
+<div class="sw-ai-progress" role="status" aria-live="polite">
+
+  <!-- 已完成步骤 -->
+  <div class="sw-ai-progress__step sw-ai-progress__step--done">
+    <div class="sw-ai-progress__step-icon" aria-hidden="true">✓</div>
+    <div class="sw-ai-progress__step-label">检索相关文档</div>
+  </div>
+
+  <!-- 进行中步骤（旋转图标由 CSS 自动渲染） -->
+  <div class="sw-ai-progress__step sw-ai-progress__step--active">
+    <div class="sw-ai-progress__step-icon" aria-hidden="true"></div>
+    <div class="sw-ai-progress__step-label">分析数据内容…</div>
+  </div>
+
+  <!-- 待执行步骤 -->
+  <div class="sw-ai-progress__step sw-ai-progress__step--pending">
+    <div class="sw-ai-progress__step-icon" aria-hidden="true">○</div>
+    <div class="sw-ai-progress__step-label">生成最终报告</div>
+  </div>
+
+</div>
+```
+
+---
+
+### class 速查
+
+| class | 说明 |
+|-------|------|
+| `sw-chat` | 对话容器，需设置固定高度 |
+| `sw-chat__messages` | 消息滚动区，`flex-direction: column` |
+| `sw-chat__msg` | 单条消息行 |
+| `sw-chat__msg--user` | 用户消息（右对齐） |
+| `sw-chat__msg--ai` | AI 消息（左对齐） |
+| `sw-chat__msg--thinking` | 等待气泡（三点动画） |
+| `sw-chat__msg-avatar` | 头像圆圈 |
+| `sw-chat__msg-bubble` | 消息气泡内容 |
+| `sw-chat__msg-actions` | 气泡下方操作栏（hover 显示） |
+| `sw-chat__msg-action` | 单个操作按钮（复制、重新生成等） |
+| `sw-chat__thinking-dot` | 三点等待动画中的单个圆点 |
+| `sw-chat__cursor` | 流式输出闪烁光标 |
+| `sw-chat__input-area` | 底部输入区容器 |
+| `sw-chat__toolbar` | 工具栏（深度思考、联网等功能按钮） |
+| `sw-chat__tool-btn` | 工具栏按钮 |
+| `sw-chat__tool-btn--active` | 工具栏按钮激活态 |
+| `sw-chat__input-row` | 文本框 + 发送按钮的行容器 |
+| `sw-chat__textarea` | 自动高度文本输入框 |
+| `sw-chat__send` | 发送按钮 |
+| `sw-chat__send--stop` | 停止按钮（响应中） |
+| `sw-chat__status` | 底部状态栏（字数、快捷键提示） |
+| `sw-ai-loading` | 行内旋转等待提示条 |
+| `sw-ai-loading__spinner` | 旋转加载图标 |
+| `sw-ai-progress` | 多步骤进度等待容器 |
+| `sw-ai-progress__step` | 单个步骤行 |
+| `sw-ai-progress__step--done` | 步骤：已完成（绿色 ✓，文字划线） |
+| `sw-ai-progress__step--active` | 步骤：进行中（蓝色旋转图标，加粗文字） |
+| `sw-ai-progress__step--pending` | 步骤：待执行（灰色） |
+
+### 交互依赖说明
+
+| 功能 | 依赖 |
+|------|------|
+| 自动高度（textarea 随内容增长） | `app.js` → `initAIChat()` |
+| 空内容禁用发送按钮 | `app.js` → `initAIChat()` |
+| Enter 发送 / Shift+Enter 换行 | `app.js` → `initAIChat()` |
+| 三点等待动画 → 流式输出演示 | `app.js` → `initAIChat()` |
+| 发送按钮 ↔ 停止按钮切换 | `app.js` → `initAIChat()` |
+| 复制消息内容 | `app.js` → `initAIChat()` |
+| 重新生成 | `app.js` → `initAIChat()` |
+| 旋转加载图标（sw-ai-loading） | 纯 CSS，无需 JS |
+| 进度步骤状态（sw-ai-progress） | 纯 CSS，状态切换由业务代码控制 |
